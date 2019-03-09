@@ -1,0 +1,46 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "API do digitalizar.me",
+  "main": "app.js",
+  "repository": "digitalizarme/api",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon ./app.js --env production",
+    "dev": "nodemon --inspect  --config nodemon.json ./app.js",
+    "init": "npm install",
+    "migrate": "./node_modules/.bin/sequelize db:migrate",
+    "seed": "./node_modules/.bin/sequelize db:seed:all",
+    "debug": "nodemon --inspect ./app.js --presets env,stage-0",
+    "lint": "./node_modules/.bin/eslint . -f table",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --exit --reporter spec --recursive",
+    "sequelize": "./node_modules/.bin/sequelize",
+    "sequelize-test": "NODE_ENV=test ./node_modules/.bin/sequelize"
+  },
+  "dependencies": {
+    "@koa/cors": "^2.2.3",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-jwt": "^3.5.1",
+    "koa-morgan": "^1.0.1",
+    "koa-router": "^7.4.0",
+    "sequelize": "^4.42.0",
+    "sqlite3": "^4.0.6",
+    "nodemon": "^1.11.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "eslint": "^4.19.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "faker": "^4.1.0",
+    "mocha": "^5.0.4",
+    "nock": "^9.2.3",
+    "nodemon": "^1.11.0",
+    "sequelize-cli": "^5.4.0"
+  },
+  "engines": {
+    "node": "8.11.3"
+  }
+}
