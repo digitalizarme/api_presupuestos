@@ -3,13 +3,24 @@ const sequelize     = require('sequelize');
 const { Op }        = sequelize;
 
 module.exports = (query) => {
-  const {offset, sizePerPage,filters,sortField, sortOrder} = query;
-  const filtros = typeof filters !== 'undefined'?JSON.parse(filters):{};
+  const {offset, sizePerPage,searchText,columns,sortField, sortOrder} = query;
+  const columnas = typeof columns !== 'undefined'?JSON.parse(columns):[];
   let condicion = [];
-  for (const [columna, obj] of Object.entries(filtros)) {
-      const { filterVal, filterType, comparator } = obj;
-      condicion.push(sequelize.where(sequelize.fn("UPPER", sequelize.col(columna)),{ [Op.like]:`%${filterVal.toUpperCase()}%` }));
+  if(typeof searchText !== 'undefined' && searchText !== "")
+  {
+    for (const columna of columnas) {
+        if(columna.searchable || typeof columna.searchable === "undefined")
+        {
+            condicion.push(sequelize.where(sequelize.fn("UPPER", sequelize.col(columna.dataField)),{ [Op.like]:`%${searchText.toUpperCase()}%` }));
+
+        }
+    }
+    
   }
+//   for (const [columna, obj] of Object.entries(filtros)) {
+//       const { filterVal, filterType, comparator } = obj;
+//       condicion.push(sequelize.where(sequelize.fn("UPPER", sequelize.col(columna)),{ [Op.like]:`%${filterVal.toUpperCase()}%` }));
+//   }
 
   const ordenacion = sortField&&sortOrder?{order:
     [
@@ -18,9 +29,9 @@ module.exports = (query) => {
         
 }:{};
 
-const condiciones = condicion?{where:
+const condiciones = condicion && condicion.length>0?{where:
     {
-        [Op.and]:condicion
+        [Op.or]:condicion
     }
 }:{};
 
@@ -30,10 +41,11 @@ const busca = {
       ,limit:sizePerPage
       ,...ordenacion
   }
+  const tabla = columnas[0].table;
   const total = 
   {
      ...condiciones
-      ,attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'total']]
+      ,attributes: [[sequelize.fn('COUNT', sequelize.col(`${tabla}.id`)), 'total']]
      
   }
   return {busca,total}

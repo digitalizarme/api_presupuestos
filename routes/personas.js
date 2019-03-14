@@ -1,37 +1,26 @@
-const { Personas,sequelize }   = require("../models");
-const { whereSequelize, objetoTabla }     = require('../utils/');
+const { Personas }   = require("../models");
+const { getAllPersonas } = require('../repositories/personas');
 
 module.exports = (app, router) => {
 
-    const msg_error = (res) => {
-        let erroPadrao;
-        switch (res.message) {
-          case `save.user.error.cpf.not_unique`:
-            erroPadrao = 'Já existe este CPF no sistema';
-            break;
-            case `save.user.error.email.not_unique`:
-            erroPadrao = 'Já existe este e-mail no sistema';
-            break;
+    // const msg_error = (res) => {
+    //     let erroPadrao;
+    //     switch (res.message) {
+    //       case `save.user.error.cpf.not_unique`:
+    //         erroPadrao = 'Já existe este CPF no sistema';
+    //         break;
+    //         case `save.user.error.email.not_unique`:
+    //         erroPadrao = 'Já existe este e-mail no sistema';
+    //         break;
       
-          default: break;
-          }
-        const erroBanco = res.original?res.original.sqlMessage:'Erro desconhecido ao tentar cadastrar um novo usuario';
-        return erroPadrao?erroPadrao:erroBanco;
-    }
+    //       default: break;
+    //       }
+    //     const erroBanco = res.original?res.original.sqlMessage:'Erro desconhecido ao tentar cadastrar um novo usuario';
+    //     return erroPadrao?erroPadrao:erroBanco;
+    // }
 
     router.get('/personas', async function(context) {  
-        const {busca, total} = whereSequelize(context.query);
-        const params = {
-            ...busca,
-            attributes: { include: [
-                [sequelize.literal('CASE WHEN "b_activo" = true THEN "SÍ" ELSE "NO" END'), 'c_activo']
-                ,[sequelize.literal('CASE WHEN "b_cliente" = true THEN "SÍ" ELSE "NO" END'), 'c_cliente']
-                ,[sequelize.literal('CASE WHEN "b_comisionista" = true THEN "SÍ" ELSE "NO" END'), 'c_comisionista']
-                ,[sequelize.literal('CASE WHEN "b_funcionario" = true THEN "SÍ" ELSE "NO" END'), 'c_funcionario']
-                ,[sequelize.literal('CASE WHEN "b_usuario" = true THEN "SÍ" ELSE "NO" END'), 'c_usuario']
-            ] }
-        }
-        context.body = objetoTabla(await Personas.findAll(params),await Personas.findAll(total))
+        context.body = await getAllPersonas(context.query)
 
     });  
 
