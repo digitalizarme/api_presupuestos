@@ -2,7 +2,7 @@ const sequelize     = require('sequelize');
 
 const { Op }        = sequelize;
 
-module.exports = (query) => {
+module.exports = (query,tabla) => {
   const {offset, sizePerPage,searchText,columns,sortField, sortOrder} = query;
   const columnas = typeof columns !== 'undefined'?JSON.parse(columns):[];
   let condicion = [];
@@ -41,7 +41,7 @@ const busca = {
       ,limit:sizePerPage
       ,...ordenacion
   }
-  const tabla = columnas[0].table;
+  tabla = !tabla?columnas[0].table:tabla;
   const total = 
   {
      ...condiciones
