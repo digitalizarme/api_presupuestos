@@ -10,7 +10,7 @@ module.exports = {
       },
       c_id_persona: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         references: {
           key: 'id',
           model: 'personas',

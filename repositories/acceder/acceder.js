@@ -14,9 +14,9 @@ module.exports = async (data) => {
   let user;
 
   if (_.get(data, 'email') && _.get(data, 'contrasena')) {
-    //const hash = encrypt(data.contrasena);
+    const hashContrasena = encrypt(data.contrasena);
     user = await Usuarios.findOne({where:
-      {c_contrasena: data.contrasena},
+      {c_contrasena: hashContrasena},
       include: 
           {
             model : Personas,
@@ -39,7 +39,6 @@ module.exports = async (data) => {
       errorCode : "001"
     };
   }
-
   if (!user) {
     throw {
       status    : 500, 

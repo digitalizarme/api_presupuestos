@@ -1,5 +1,7 @@
 const { Usuarios }   = require("../models");
 const { getAllUsers } = require('../repositories/usuarios');
+const { encrypt } = require('../utils/');
+
 module.exports = (app, router) => {
 
     router.get('/usuarios', async function(context) {  
@@ -14,7 +16,16 @@ module.exports = (app, router) => {
     });  
 
     router.post('/usuarios', async function(context) {  
-        const datos = context.request.body;
+        let datos = context.request.body;
+        if(datos.c_contrasena)
+        {
+            datos = 
+            {
+                ...datos
+                ,c_contrasena: encrypt(datos.c_contrasena)
+            }
+    
+        }
         const id = datos.id;
         let res;
         if(typeof datos.id === "undefined" || id === '')
