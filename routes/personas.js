@@ -18,14 +18,13 @@ module.exports = (app, router) => {
     router.post('/personas', async function(context) {  
         const datos = context.request.body;
         const id = datos.id;
-        let res;
         try {
             if(typeof datos.id === "undefined" || id === '')
             {
-                res = await Personas.create(datos);
+                await Personas.create(datos);
             }
             else{
-                res = await Personas.update( datos , { where: { id } });
+                await Personas.update( datos , { where: { id } });
             }
             context.body =  datos;
         }
