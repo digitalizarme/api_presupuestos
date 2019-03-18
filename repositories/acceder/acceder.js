@@ -5,8 +5,6 @@ const { createJwtToken } = require('../../utils');
 const { encrypt } = require('../../utils/');
 const { Usuarios,Personas } = require('../../models');
 
-const LOGIN_ERROR_MESSAGE = 'Email ou senha inválido. Tente novamente por favor.';
-
 /**
  * login the user
  */
@@ -35,15 +33,21 @@ module.exports = async (data) => {
   else {
     throw {
       status    : 500, 
-      message   : LOGIN_ERROR_MESSAGE,
-      errorCode : "001"
+      message   : "No Recibimos el email o la contraseña",
     };
   }
   if (!user) {
     throw {
       status    : 500, 
-      message   : LOGIN_ERROR_MESSAGE,
-      errorCode : "001"
+      message   : "Email o Contraseña incorrecta, favor intentar nuevamente",
+    };
+  }
+
+  if(!user.b_activo)
+  {
+    throw {
+      status    : 500, 
+      message   : "Este usuario no esta activo en el sistema",
     };
   }
 

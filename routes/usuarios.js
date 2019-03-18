@@ -1,6 +1,7 @@
 const { Usuarios }   = require("../models");
 const { getAllUsers } = require('../repositories/usuarios');
 const { encrypt } = require('../utils/');
+const { traduceErrores } = require('../utils/');
 
 module.exports = (app, router) => {
 
@@ -27,15 +28,19 @@ module.exports = (app, router) => {
     
         }
         const id = datos.id;
-        let res;
-        if(typeof datos.id === "undefined" || id === '')
+        try
         {
-            res = await Usuarios.create(datos);
+            if(typeof datos.id === "undefined" || id === '')
+            {
+                await Usuarios.create(datos);
+            }
+            else{
+                await Usuarios.update( datos , { where: { id } });
+            }
+            context.body = datos;
         }
-        else{
-            res = await Usuarios.update( datos , { where: { id } });
-        }
-        context.body = res;
-
+        catch(error) {
+            throw Error(traduceErrores(error))
+        };
     });    
 };

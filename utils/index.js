@@ -5,4 +5,6 @@ module.exports = {
   createJwtToken:require('./createJwtToken'),
   encrypt: require('./encrypt'),
   checkAccess: require('./checkAccess'),
+  traduceErrores: require('./traduceErrores'),
+  
 };
