@@ -1,4 +1,4 @@
-
+const moment = require('moment');
 
 module.exports = (sequelize, DataTypes) => {
   const Personas = sequelize.define('Personas', {
@@ -20,13 +20,31 @@ module.exports = (sequelize, DataTypes) => {
     c_cel2                      : DataTypes.STRING,
     c_contacto                  : DataTypes.STRING,
     c_direccion                 : DataTypes.STRING,
-    n_valor_porcentaje_comision : DataTypes.FLOAT,
+     n_valor_porcentaje_comision: {
+      type     : DataTypes.FLOAT,
+      validate : {
+        isFloat: true
+      }
+    },
+
     b_activo                    : DataTypes.BOOLEAN,
     b_cliente                   : DataTypes.BOOLEAN,
     b_comisionista              : DataTypes.BOOLEAN,
     b_funcionario               : DataTypes.BOOLEAN,
     b_usuario                   : DataTypes.BOOLEAN,
     t_observacion               : DataTypes.TEXT,
+    createdAt: {
+      type: DataTypes.DATE,
+      get: function() {
+         return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY HH:mm:ss')
+      }
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      get: function() {
+         return moment(this.getDataValue('updatedAt')).format('DD/MM/YYYY HH:mm:ss')
+      }
+    },
 
   }, {
     tableName: 'Personas',
