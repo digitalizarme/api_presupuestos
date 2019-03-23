@@ -22,10 +22,15 @@ module.exports = (error) => {
       erroPadrao = 'Yá existe esta descripción en el sistema';
       break;
       
-    default: break;
+      case `Validation isFloat on n_valor_porcentaje_comision failed`:
+      erroPadrao = 'El valor de la comision no es valido';
+      break;
+      
+    default: erroPadrao = error.errors[0].message 
+    break;
     }
   }
-  const erroBanco = error.original && error.original.sqlMessage?error.original.sqlMessage:error.original.code==='SQLITE_CONSTRAINT'?'No se pudo eliminar este registro porque esta siendo usado en otras partes del sistema':'Error desconocido';
+  const erroBanco = error.original && error.original.sqlMessage?error.original.sqlMessage:typeof error.original !== "undefined" && error.original.code==='SQLITE_CONSTRAINT'?'No se pudo eliminar este registro porque esta siendo usado en otras partes del sistema':'Error desconocido';
   const errorMessage = erroPadrao?erroPadrao:erroBanco;
   return (errorMessage)
 };
