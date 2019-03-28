@@ -7,5 +7,6 @@ module.exports = {
   checkAccess: require('./checkAccess'),
   traduceErrores: require('./traduceErrores'),
   fechaHoyYMD: require('./fechaHoyYMD'),
+  fechaHoyUTC: require('./fechaHoyUTC'),
   
 };

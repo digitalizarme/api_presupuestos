@@ -5,8 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     c_descripcion         : DataTypes.STRING,
     c_simbolo             : DataTypes.STRING,
     c_letras              : DataTypes.STRING,
-    createdAt             : DataTypes.DATE,
-    updatedAt             : DataTypes.DATE,
 
   }, {
     tableName: 'monedas',

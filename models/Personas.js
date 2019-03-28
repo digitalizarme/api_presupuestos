@@ -32,8 +32,6 @@ module.exports = (sequelize, DataTypes) => {
     b_funcionario               : DataTypes.BOOLEAN,
     b_usuario                   : DataTypes.BOOLEAN,
     t_observacion               : DataTypes.TEXT,
-    createdAt                   : DataTypes.DATE,
-    updatedAt                   : DataTypes.DATE,
 
   }, {
     tableName: 'Personas',

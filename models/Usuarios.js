@@ -13,8 +13,6 @@ module.exports = (sequelize, DataTypes) => {
     b_editar              : DataTypes.BOOLEAN,
     b_eliminar            : DataTypes.BOOLEAN,
     b_imprimir            : DataTypes.BOOLEAN,
-    createdAt             : DataTypes.DATE,
-    updatedAt             : DataTypes.DATE,
 
 
   }, {
