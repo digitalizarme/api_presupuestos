@@ -28,16 +28,23 @@ module.exports = (app, router) => {
 
     router.post('/cotizaciones', async function(context) {  
         const datos = context.request.body;
+        try
+        {
+            await Cotizaciones.create(datos);
+            context.body = datos;
+        }
+        catch(error) {
+            throw Error(traduceErrores(error))
+        };
+
+
+    });    
+    router.put('/cotizaciones', async function(context) {  
+        const datos = context.request.body;
         const id = datos.id;
         try
         {
-            if(typeof datos.id === "undefined" || id === '')
-            {
-                await Cotizaciones.create(datos);
-            }
-            else{
-                await Cotizaciones.update( datos , { where: { id } });
-            }
+            await Cotizaciones.update( datos , { where: { id } });
             context.body = datos;
         }
         catch(error) {
