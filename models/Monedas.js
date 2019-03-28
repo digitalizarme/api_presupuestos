@@ -1,13 +1,15 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const Servicios_grupos = sequelize.define('Servicios_grupos', {
+  const Monedas = sequelize.define('Monedas', {
     c_descripcion         : DataTypes.STRING,
+    c_simbolo             : DataTypes.STRING,
+    c_letras              : DataTypes.STRING,
     createdAt             : DataTypes.DATE,
     updatedAt             : DataTypes.DATE,
 
   }, {
-    tableName: 'servicios_grupos',
+    tableName: 'monedas',
   });
-  return Servicios_grupos;
+  return Monedas;
 };

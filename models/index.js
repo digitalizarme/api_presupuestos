@@ -7,17 +7,6 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 let config = require(__dirname + '/../config/config.json')[env];
 const db = {};
-
-// if(env === 'production')
-// {
-//   const dir_db_sqlite3 = path.resolve(__dirname,config.storage);
-//   console.log(dir_db_sqlite3);
-
-//   config = {
-//     ...config,
-//     storage:dir_db_sqlite3
-//   }
-// }
 let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);

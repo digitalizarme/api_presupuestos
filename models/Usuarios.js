@@ -1,4 +1,3 @@
-const moment = require('moment');
 
 module.exports = (sequelize, DataTypes) => {
   const Usuarios = sequelize.define('Usuarios', {
@@ -14,18 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     b_editar              : DataTypes.BOOLEAN,
     b_eliminar            : DataTypes.BOOLEAN,
     b_imprimir            : DataTypes.BOOLEAN,
-    createdAt: {
-      type: DataTypes.DATE,
-      get: function() {
-         return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY HH:mm:ss')
-      }
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      get: function() {
-         return moment(this.getDataValue('updatedAt')).format('DD/MM/YYYY HH:mm:ss')
-      }
-    },
+    createdAt             : DataTypes.DATE,
+    updatedAt             : DataTypes.DATE,
 
 
   }, {

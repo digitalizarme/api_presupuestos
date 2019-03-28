@@ -1,7 +1,7 @@
 
 module.exports = (error) => {
   let erroPadrao;
-  console.log(error);
+  console.log(error,"error en el truduce errores");
   if(error.errors && error.errors.length >0)
   {
     console.log(error.errors[0].message);

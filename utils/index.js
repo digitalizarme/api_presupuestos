@@ -6,5 +6,6 @@ module.exports = {
   encrypt: require('./encrypt'),
   checkAccess: require('./checkAccess'),
   traduceErrores: require('./traduceErrores'),
+  fechaHoyYMD: require('./fechaHoyYMD'),
   
 };

@@ -16,6 +16,7 @@
   },
   "production": {
     "dialect": "sqlite",
+    "define": { "charset": "utf8", "dialectOptions": { "collate": "utf8_general_ci" } },
     "storage": "./db/database.sqlite3",
     "pool": {
       "max": 5,
