@@ -13,7 +13,7 @@ module.exports = (app, router) => {
 
     });  
 
-    router.del('/generico/eliminar', async function(context) {  
+    router.delete('/generico/eliminar', async function(context) {  
         try{
             context.body =  await eliminar(context.query);
         }
