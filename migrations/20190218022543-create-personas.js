@@ -78,12 +78,12 @@ module.exports = {
       },
       b_activo: {
         type: Sequelize.BOOLEAN
-        ,defaultValue  : true
+        ,defaultValue  : false
 
       },
       b_cliente: {
         type: Sequelize.BOOLEAN
-        ,defaultValue  : true
+        ,defaultValue  : false
       },
       b_comisionista: {
         type: Sequelize.BOOLEAN

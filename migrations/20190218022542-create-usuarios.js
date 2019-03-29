@@ -48,7 +48,7 @@ module.exports = {
       b_activo: {
         allowNull: false,
         type: Sequelize.BOOLEAN
-        ,defaultValue  : true
+        ,defaultValue  : false
 
       },
       b_administrador: {
@@ -58,22 +58,22 @@ module.exports = {
       },
       b_cadastrar: {
         type: Sequelize.BOOLEAN
-        ,defaultValue  : true
+        ,defaultValue  : false
 
       },
       b_editar: {
         type: Sequelize.BOOLEAN
-        ,defaultValue  : true
+        ,defaultValue  : false
 
       },
       b_eliminar: {
         type: Sequelize.BOOLEAN
-        ,defaultValue  : true
+        ,defaultValue  : false
 
       },
       b_imprimir: {
         type: Sequelize.BOOLEAN
-        ,defaultValue  : true
+        ,defaultValue  : false
 
       },
       createdAt: {
