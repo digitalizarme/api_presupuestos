@@ -1,34 +1,22 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Personas', {
+    return queryInterface.createTable('Configuraciones', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      c_nombre: {
+      c_ruc: {
         allowNull: false,
         type: Sequelize.STRING
         ,validate: {
           notEmpty: false,
           len: {
-            args: [5, 50],
+            args: [5, 30],
           }
         }
-      },
-      c_identificacion: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        unique:true
-        ,validate: {
-          notEmpty: false,
-          len: {
-            args: [5, 50],
-          }
-        }
-
       },
       c_email: {
         allowNull: false,
@@ -39,31 +27,35 @@ module.exports = {
           isEmail: true
         }
       },
-      c_tel1: {
+      c_tel: {
         type: Sequelize.STRING
       },
-      c_tel2: {
-        type: Sequelize.STRING
-      },
-      c_cel1: {
+      c_razon_social: {
         allowNull: false,
         type: Sequelize.STRING
         ,validate: {
           notEmpty: false,
           len: {
-            args: [5, 50],
+            args: [5, 80],
           }
         }
-
       },
-      c_cel2: {
+      c_nombre_fantasia: {
+        allowNull: false,
         type: Sequelize.STRING
+        ,validate: {
+          notEmpty: false,
+          len: {
+            args: [5, 80],
+          }
+        }
       },
-      c_contacto: {
-        type: Sequelize.STRING
-      },
-      t_avatar: {
+      t_logo: {
         type: Sequelize.TEXT
+      },
+      c_slogan: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       c_direccion: {
         allowNull: false,
@@ -74,36 +66,29 @@ module.exports = {
             args: [5, 100],
           }
         }
-
       },
       n_valor_porcentaje_comision: {
+        allowNull: false,
         type: Sequelize.FLOAT
       },
-      b_activo: {
+      b_comision: {
         type: Sequelize.BOOLEAN
         ,defaultValue  : false
 
       },
-      b_cliente: {
+      b_flete: {
         type: Sequelize.BOOLEAN
         ,defaultValue  : false
       },
-      b_comisionista: {
-        type: Sequelize.BOOLEAN
-        ,defaultValue  : false
-
-      },
-      b_funcionario: {
+      b_seguro: {
         type: Sequelize.BOOLEAN
         ,defaultValue  : false
 
       },
-      b_usuario: {
-        type: Sequelize.BOOLEAN
-        ,defaultValue  : false
-
+      c_obs_presup_1: {
+        type: Sequelize.TEXT
       },
-      t_observacion: {
+      c_obs_presup_2: {
         type: Sequelize.TEXT
       },
       createdAt: {
@@ -117,6 +102,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Personas');
+    return queryInterface.dropTable('Configuraciones');
   }
 };

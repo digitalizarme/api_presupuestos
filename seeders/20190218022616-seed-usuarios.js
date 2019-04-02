@@ -6,7 +6,7 @@ module.exports = {
       return queryInterface.bulkInsert('Usuarios', [
         {
           c_id_persona          : 1,
-          c_usuario             : 'rodrigo',
+          c_usuario             : 'admin',
           c_contrasena          : encrypt('123456'),
           b_activo              : true,
           b_administrador       : true,

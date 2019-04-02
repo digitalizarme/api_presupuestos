@@ -1,7 +1,7 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "API do digitalizar.me",
+  "description": "API da digitalizar.me",
   "main": "app.js",
   "repository": "digitalizarme/api",
   "license": "MIT",

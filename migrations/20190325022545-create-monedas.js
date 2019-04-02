@@ -18,7 +18,13 @@ module.exports = {
       },
       c_letras: {
         type: Sequelize.STRING
-        ,allowNull: false,
+        ,allowNull: false
+        ,validate: {
+          notEmpty: false,
+          len: {
+            args: [3, 3],
+          }
+        }
       },
       createdAt: {
         allowNull: false,

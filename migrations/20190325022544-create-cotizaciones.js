@@ -10,7 +10,13 @@ module.exports = {
       },
       c_monedaOrigemDestino: {
         type: Sequelize.STRING
-        ,allowNull: false,
+        ,allowNull: false
+        ,validate: {
+          notEmpty: false,
+          len: {
+            args: [6, 6],
+          }
+        }
       },
       n_valor: {
         type: Sequelize.FLOAT
