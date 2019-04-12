@@ -28,11 +28,7 @@ module.exports = app
     path: [
       '/',
       '/acceder',
-      '/forgot-password',
-      '/reset-password',
-      '/users',
-      '/campaigns/current',
-      '/initialData',
+      '/configuraciones',
     ]
   }))
   .use(bodyParser({
