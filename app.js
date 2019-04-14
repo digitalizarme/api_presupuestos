@@ -5,7 +5,7 @@ const KoaRouter = require('koa-router');
 const bodyParser = require('koa-bodyparser');
 const jwt = require('koa-jwt');
 const morgan = require('koa-morgan');
-
+const pathToRegexp = require('path-to-regexp');
 const app = new Koa();
 const port = parseInt(process.env.PORT, 10) || 3000;
 
@@ -28,6 +28,7 @@ module.exports = app
     path: [
       '/',
       '/acceder',
+      /^\/acceder\/verificaEmail\/.*/,
       '/configuraciones',
     ]
   }))
