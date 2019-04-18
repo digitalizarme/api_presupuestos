@@ -16,8 +16,8 @@ module.exports = {
           b_comision                  : true,
           b_flete                     : true,
           b_seguro                    : false,
-          c_obs_presup_1              : 'OBS LINEA 1',
-          c_obs_presup_2              : 'OBS LINEA 2',
+          t_obs_presup_1              : 'OBS LINEA 1',
+          t_obs_presup_2              : 'OBS LINEA 2',
           createdAt                   : new Date(),
           updatedAt                   : new Date()
         }

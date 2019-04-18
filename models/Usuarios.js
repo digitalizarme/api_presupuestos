@@ -1,7 +1,7 @@
 
 module.exports = (sequelize, DataTypes) => {
   const Usuarios = sequelize.define('Usuarios', {
-    c_id_persona          : DataTypes.STRING,
+    n_id_persona          : DataTypes.INTEGER,
     c_usuario  : {
       type   : DataTypes.STRING,
       unique : true
@@ -16,12 +16,12 @@ module.exports = (sequelize, DataTypes) => {
 
 
   }, {
-    tableName: 'usuarios',
+    tableName: 'Usuarios',
   });
 
   Usuarios.associate = (models) => {
     Usuarios.belongsTo(models.Personas, {
-      foreignKey : 'c_id_persona',
+      foreignKey : 'n_id_persona',
       as         : 'persona'
     });
   };

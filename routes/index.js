@@ -1,5 +1,5 @@
 module.exports = (app, router) => {
-  require('./servicios_grupo.js')(app, router)
+  require('./serviciosGrupos.js')(app, router)
   require('./cotizaciones.js')(app, router)
   require('./usuarios.js')(app, router)
   require('./personas.js')(app, router)

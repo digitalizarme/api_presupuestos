@@ -1,38 +1,31 @@
+
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Monedas', {
+    return queryInterface.createTable('Fletes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      c_descripcion: {
+      c_tipo: {
         type: Sequelize.STRING
-        ,unique   : true
         ,allowNull: false,
+        unique   : true,
       },
-      c_simbolo: {
-        type: Sequelize.STRING
-        ,unique   : true
-        ,allowNull: false,
-      },
-      c_letras: {
-        type: Sequelize.STRING
-        ,unique   : true
-        ,allowNull: false
-        ,validate: {
-          notEmpty: false,
-          len: {
-            args: [3, 3],
-          }
-        }
+      n_id_moneda: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       b_activo: {
         type: Sequelize.BOOLEAN
         ,allowNull: false
         ,defaultValue  : false
+      },
+      n_valor: {
+        type: Sequelize.FLOAT
+        ,allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -45,6 +38,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Monedas');
+    return queryInterface.dropTable('Fletes');
   }
 };

@@ -28,8 +28,8 @@ module.exports = (sequelize, DataTypes) => {
     b_comision                   : DataTypes.BOOLEAN,
     b_flete                      : DataTypes.BOOLEAN,
     b_seguro                     : DataTypes.BOOLEAN,
-    c_obs_presup_1               : DataTypes.TEXT,
-    c_obs_presup_2               : DataTypes.TEXT,
+    t_obs_presup_1               : DataTypes.TEXT,
+    t_obs_presup_2               : DataTypes.TEXT,
 
   }, {
     tableName: 'Configuraciones',

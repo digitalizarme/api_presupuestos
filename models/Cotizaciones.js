@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     n_valor               : DataTypes.FLOAT,
 
   }, {
-    tableName: 'cotizaciones',
+    tableName: 'Cotizaciones',
   });
   return Cotizaciones;
 };

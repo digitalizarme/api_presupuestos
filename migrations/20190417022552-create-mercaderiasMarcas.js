@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Servicios_grupos', {
+    return queryInterface.createTable('MercaderiasMarcas', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,8 +12,11 @@ module.exports = {
         type: Sequelize.STRING
         ,allowNull: false,
         unique   : true,
-
-
+      },
+      b_activo: {
+        type: Sequelize.BOOLEAN
+        ,allowNull: false
+        ,defaultValue  : false
       },
       createdAt: {
         allowNull: false,
@@ -26,6 +29,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Servicios_grupos');
+    return queryInterface.dropTable('MercaderiasMarcas');
   }
 };

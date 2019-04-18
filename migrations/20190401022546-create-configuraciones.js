@@ -9,8 +9,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       c_ruc: {
-        allowNull: false,
-        type: Sequelize.STRING
+        allowNull: false
+        ,unique   : true
+        ,type: Sequelize.STRING
         ,validate: {
           notEmpty: false,
           len: {
@@ -85,10 +86,10 @@ module.exports = {
         ,defaultValue  : false
 
       },
-      c_obs_presup_1: {
+      t_obs_presup_1: {
         type: Sequelize.TEXT
       },
-      c_obs_presup_2: {
+      t_obs_presup_2: {
         type: Sequelize.TEXT
       },
       createdAt: {
