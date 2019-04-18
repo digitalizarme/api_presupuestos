@@ -11,7 +11,7 @@ module.exports = {
           c_nombre_fantasia           : 'Digitalizar.me',
           c_slogan                    : 'Porque ya vivimos en la era digital',
           c_direccion                 : 'SANTA RITA',
-          n_valor_porcentaje_comision : 0.7,
+          n_valor_porcentaje_comision : 70,
           c_tel                       : '0983 668678',
           b_comision                  : true,
           b_flete                     : true,
