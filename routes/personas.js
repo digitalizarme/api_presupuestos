@@ -35,4 +35,16 @@ module.exports = (app, router) => {
             throw Error(traduceErrores(error))
         };
     });    
+
+    router.delete('/personas', async function(context) {  
+        try{
+            const {id} = context.query;
+            await Personas.destroy(  { where: { id } });
+            context.body =  id;
+        }
+        catch(error) {
+            throw Error(traduceErrores(error))
+        };
+    });    
+
 };

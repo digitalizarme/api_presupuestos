@@ -53,4 +53,15 @@ module.exports = (app, router) => {
 
 
     });    
+
+    router.delete('/cotizaciones', async function(context) {  
+        try{
+            const {id} = context.query;
+            context.body =  await Cotizaciones.destroy( { where: { id } });
+        }
+        catch(error) {
+            throw Error(traduceErrores(error))
+        };
+    });    
+
 };

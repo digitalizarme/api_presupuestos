@@ -44,5 +44,16 @@ module.exports = (app, router) => {
         catch(error) {
             throw Error(traduceErrores(error))
         };
+    });  
+    
+    router.delete('/serviciosGrupos', async function(context) {  
+        try{
+            const {id} = context.query;
+            context.body =  await ServiciosGrupos.destroy( { where: { id } });
+        }
+        catch(error) {
+            throw Error(traduceErrores(error))
+        };
     });    
+
 };

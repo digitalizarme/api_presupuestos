@@ -58,4 +58,15 @@ module.exports = (app, router) => {
             throw Error(traduceErrores(error))
         };
     });    
+
+    router.delete('/usuarios', async function(context) {  
+        try{
+            const {id} = context.query;
+            context.body =  await Usuarios.destroy( { where: { id } });
+        }
+        catch(error) {
+            throw Error(traduceErrores(error))
+        };
+    });    
+
 };
