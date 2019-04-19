@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     n_id_usuario              : DataTypes.INTEGER,
     n_id_flete                : DataTypes.INTEGER,
     n_id_persona_comisionista : DataTypes.INTEGER,
+    n_porc_comisionista       : DataTypes.FLOAT,
     n_id_seguro               : DataTypes.INTEGER,
     n_id_status               : DataTypes.INTEGER,
     n_id_moneda               : DataTypes.INTEGER,
@@ -19,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     n_dias_entrega            : DataTypes.INTEGER,
     n_cuotas_pago             : DataTypes.INTEGER,
     n_dias_Frecuencia_pago    : DataTypes.INTEGER,
-    t_observacion              : DataTypes.TEXT,
+    t_observacion             : DataTypes.TEXT,
     
   }, {
     tableName: 'Presupuestos',
