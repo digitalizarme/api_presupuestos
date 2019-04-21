@@ -37,7 +37,12 @@ module.exports = (app, router) => {
         };
     });  
 
-    router.put('/usuarios', async function(context) {  
+    router.put('/usuarios', async function(context) { 
+        const id = datos.id;
+        if(id == 1)
+        {
+            throw Error("Usuario del sistema no se permite actualizar");
+        }
         let datos = context.request.body;
         if(datos.c_contrasena)
         {
@@ -48,7 +53,6 @@ module.exports = (app, router) => {
             }
     
         }
-        const id = datos.id;
         try
         {
             await Usuarios.update( datos , { where: { id } });
@@ -60,8 +64,12 @@ module.exports = (app, router) => {
     });    
 
     router.delete('/usuarios', async function(context) {  
+        const {id} = context.query;
+        if(id == 1)
+        {
+            throw Error("Usuario del sistema no se permite eliminar");
+        }
         try{
-            const {id} = context.query;
             context.body =  await Usuarios.destroy( { where: { id } });
         }
         catch(error) {

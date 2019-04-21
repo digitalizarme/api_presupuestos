@@ -27,6 +27,10 @@ module.exports = (app, router) => {
     router.put('/personas', async function(context) {  
         const datos = context.request.body;
         const id = datos.id;
+        if(id == 1)
+        {
+            throw Error("Persona del sistema no se permite actualizar");
+        }
         try {
             await Personas.update( datos , { where: { id } });
             context.body =  datos;
@@ -37,8 +41,12 @@ module.exports = (app, router) => {
     });    
 
     router.delete('/personas', async function(context) {  
+        const {id} = context.query;
+        if(id == 1)
+        {
+            throw Error("Persona del sistema no se permite eliminar");
+        }
         try{
-            const {id} = context.query;
             context.body =  await Personas.destroy(  { where: { id } });
         }
         catch(error) {
