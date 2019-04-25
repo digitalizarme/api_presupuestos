@@ -18,6 +18,11 @@ module.exports = {
         ,unique   : true
         ,allowNull: false,
       },
+      n_digitos: {
+        type: Sequelize.INTEGER
+        ,allowNull: false
+        ,defaultValue  : 2
+      },
       c_letras: {
         type: Sequelize.STRING
         ,unique   : true

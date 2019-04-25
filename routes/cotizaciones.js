@@ -1,4 +1,4 @@
-const { Cotizaciones, Monedas }     = require("../models");
+const { Cotizaciones }     = require("../models");
 const { enlinea }                   = require("../repositories/cotizaciones");
 const { traduceErrores }            = require('../utils/');
 const { whereSequelize, objetoTabla }     = require('../utils/');
@@ -7,11 +7,6 @@ module.exports = (app, router) => {
 
     router.get('/cotizaciones/enlinea', async function(context) {  
         context.body = await enlinea(context.query);
-    });  
-
-    router.get('/cotizaciones/monedas', async function(context) {  
-        context.body = await Monedas.findAll();
-
     });  
 
     router.get('/cotizaciones', async function(context) {  
