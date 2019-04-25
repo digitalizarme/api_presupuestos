@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     c_cel2                      : DataTypes.STRING,
     c_contacto                  : DataTypes.STRING,
     c_direccion                 : DataTypes.STRING,
-    t_avatar                    : DataTypes.TEXT,
      n_valor_porcentaje_comision: {
       type     : DataTypes.FLOAT,
       validate : {

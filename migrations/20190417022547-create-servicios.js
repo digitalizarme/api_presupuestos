@@ -30,10 +30,6 @@ module.exports = {
         type: Sequelize.TEXT
         ,allowNull: true,
       },
-      n_venta: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
-      },
       n_comision: {
         type: Sequelize.FLOAT
         ,allowNull: true,

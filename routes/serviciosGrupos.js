@@ -15,6 +15,11 @@ module.exports = (app, router) => {
 
     });  
 
+    router.get('/serviciosGrupos/todos', async function(context) {  
+        context.body = await ServiciosGrupos.findAll()
+
+    });  
+
     router.get('/serviciosGrupos/:id', async function(context) {  
         const id = context.params.id;
         context.body = await ServiciosGrupos.findOne({where:{id}})        

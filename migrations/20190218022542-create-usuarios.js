@@ -18,8 +18,6 @@ module.exports = {
         ,validate: {
           notEmpty: false,
         }
-
-
       },
       c_usuario: {
         allowNull: false,
@@ -31,8 +29,6 @@ module.exports = {
             args: [5, 50],
           }
         }
-
-
       },
       c_contrasena: {
         allowNull: false,
@@ -43,7 +39,9 @@ module.exports = {
             args: [5, 50],
           }
         }
-
+      },
+      t_avatar: {
+        type: Sequelize.TEXT
       },
       b_activo: {
         allowNull: false,

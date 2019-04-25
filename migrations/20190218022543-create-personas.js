@@ -62,9 +62,6 @@ module.exports = {
       c_contacto: {
         type: Sequelize.STRING
       },
-      t_avatar: {
-        type: Sequelize.TEXT
-      },
       c_direccion: {
         allowNull: false,
         type: Sequelize.STRING

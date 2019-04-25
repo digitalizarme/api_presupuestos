@@ -6,6 +6,8 @@ module.exports = (query,tabla) => {
   const {offset, sizePerPage,searchText,columns,sortField, sortOrder, defaultSorted} = query;
   const camposOrdenar = typeof defaultSorted !== 'undefined'?JSON.parse(defaultSorted):[];
   const columnas = typeof columns !== 'undefined'?JSON.parse(columns):[];
+  tabla = !tabla?columnas[0].table:tabla;
+
   let condicion = [];
   if(typeof searchText !== 'undefined' && searchText !== "")
   {
@@ -22,19 +24,19 @@ module.exports = (query,tabla) => {
   let ordenacion = sortField&&sortOrder
   ?
     [
-      sequelize.literal(`${sortField} COLLATE NOCASE ${sortOrder}`),
+      sequelize.literal(`${tabla}.${sortField} COLLATE NOCASE ${sortOrder}`),
     ]
         
   :
     [
-      sequelize.literal(`updatedAt desc`),
+      sequelize.literal(`${tabla}.updatedAt desc`),
     ]
   ;
 
   for (let index = 1; index < camposOrdenar.length; index++) 
   {
     const ordenar = camposOrdenar[index];
-    ordenacion.push(sequelize.literal(`${ordenar.dataField} ${ordenar.order}`))
+    ordenacion.push(sequelize.literal(`${tabla}.${ordenar.dataField} ${ordenar.order}`))
   }
 
   ordenacion = {order: ordenacion};
@@ -51,7 +53,6 @@ module.exports = (query,tabla) => {
         ,limit:sizePerPage
         ,...ordenacion
     }
-  tabla = !tabla?columnas[0].table:tabla;
   const total = 
   {
      ...condiciones

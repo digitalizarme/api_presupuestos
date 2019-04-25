@@ -38,12 +38,12 @@ module.exports = (app, router) => {
     });  
 
     router.put('/usuarios', async function(context) { 
+        let datos = context.request.body;
         const id = datos.id;
         if(id == 1)
         {
             throw Error("Usuario del sistema no se permite actualizar");
         }
-        let datos = context.request.body;
         if(datos.c_contrasena)
         {
             datos = 

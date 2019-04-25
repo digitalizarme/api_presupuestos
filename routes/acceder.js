@@ -26,7 +26,7 @@ module.exports = (app, router) => {
         const res = 
         {
             res: persona && usuario?true:false,
-            avatar: persona && usuario && persona.t_avatar?persona.t_avatar:null,
+            avatar: usuario && usuario.t_avatar?usuario.t_avatar:null,
             msg
         }
         context.body =  res;

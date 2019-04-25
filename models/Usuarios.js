@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       type   : DataTypes.STRING,
       unique : true
     },
+    t_avatar              : DataTypes.TEXT,
     c_contrasena          : DataTypes.STRING,
     b_activo              : DataTypes.BOOLEAN,
     b_administrador       : DataTypes.BOOLEAN,

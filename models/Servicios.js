@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
     n_id_grupo        : DataTypes.INTEGER,
     b_activo          : DataTypes.BOOLEAN,
     t_observacion     : DataTypes.TEXT,
-    n_venta           : DataTypes.FLOAT,
     n_comision        : DataTypes.FLOAT,
     n_iva             : DataTypes.INTEGER,
     n_valor           : DataTypes.FLOAT,

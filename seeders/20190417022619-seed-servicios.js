@@ -9,7 +9,6 @@ module.exports = {
           n_id_grupo      : 1,
           b_activo        : true,
           t_observacion   : 'OBSERVACION DE PRUEBA',
-          n_venta         : 1.99,
           n_comision      : 50.01,
           n_iva           : 10,
           n_valor         : 10.10,
