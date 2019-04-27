@@ -10,6 +10,11 @@ module.exports = (app, router) => {
 
     });  
 
+    router.get('/mercaderiasMarcas/todas', async function(context) {  
+        context.body = await MercaderiasMarcas.findAll();
+
+    });  
+
     router.get('/mercaderiasMarcas/:id', async function(context) {  
         const id = context.params.id;
         context.body = await MercaderiasMarcas.findOne({where:{id}})        

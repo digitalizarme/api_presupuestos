@@ -25,18 +25,21 @@ module.exports = async (query) => {
             ] 
         },
     }
-    // const newTotal = {
-    //     ...total,
-    //     attributes: { 
-    //         include: [
-    //             ...total.attributes
-    //             ,[sequelize.literal('CASE WHEN "b_activo" = true THEN "SÍ" ELSE "NO" END'), 'c_activo']
-    //             ,[sequelize.literal('CASE WHEN "b_cliente" = true THEN "SÍ" ELSE "NO" END'), 'c_cliente']
-    //             ,[sequelize.literal('CASE WHEN "b_comisionista" = true THEN "SÍ" ELSE "NO" END'), 'c_comisionista']
-    //             ,[sequelize.literal('CASE WHEN "b_funcionario" = true THEN "SÍ" ELSE "NO" END'), 'c_funcionario']
-    //             ,[sequelize.literal('CASE WHEN "b_usuario" = true THEN "SÍ" ELSE "NO" END'), 'c_usuario']
-    //         ] 
-    //     },
-    // }
-    return objetoTabla(await Servicios.findAll(params),await Servicios.findAll(total))
+    const newTotal = {
+        ...total,
+        include: 
+        [
+            {
+                model : ServiciosGrupos,
+                as    : 'servicioGrupo',
+                attributes: ['c_descripcion']
+            },
+            {
+                model : Monedas,
+                as    : 'moneda',
+                attributes: ['c_descripcion']
+            }
+        ],
+    }
+    return objetoTabla(await Servicios.findAll(params),await Servicios.findAll(newTotal))
 }

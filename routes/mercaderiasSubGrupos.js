@@ -10,6 +10,10 @@ module.exports = (app, router) => {
 
     });  
 
+    router.get('/mercaderiasSubGrupos/todos', async function(context) {  
+        context.body = await MercaderiasSubGrupos.findAll();
+    });  
+
     router.get('/mercaderiasSubGrupos/:id', async function(context) {  
         const id = context.params.id;
         context.body = await MercaderiasSubGrupos.findOne({where:{id}})        

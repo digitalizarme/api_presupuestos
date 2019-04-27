@@ -1,12 +1,12 @@
 const { Mercaderias }   = require("../models");
-const { whereSequelize, objetoTabla }     = require('../utils/');
 const { traduceErrores } = require('../utils/');
+const { traeTodasMercaderias }    = require('../repositories/mercaderias');
 
 module.exports = (app, router) => {
 
     router.get('/mercaderias', async function(context) {  
-        const {busca, total} = whereSequelize(context.query);
-        context.body = objetoTabla(await Mercaderias.findAll(busca),await Mercaderias.findAll(total))
+        
+        context.body = await traeTodasMercaderias(context.query);
 
     });  
 
