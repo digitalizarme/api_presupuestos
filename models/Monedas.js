@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       type   : DataTypes.STRING,
       unique : true
     },
-    n_digitos                       : {
+    n_decimales                       : {
       type   : DataTypes.INTEGER,
     },
 

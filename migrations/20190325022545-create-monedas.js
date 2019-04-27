@@ -18,7 +18,7 @@ module.exports = {
         ,unique   : true
         ,allowNull: false,
       },
-      n_digitos: {
+      n_decimales: {
         type: Sequelize.INTEGER
         ,allowNull: false
         ,defaultValue  : 2
