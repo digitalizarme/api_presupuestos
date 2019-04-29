@@ -6,7 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     n_id_persona_baja     : DataTypes.INTEGER,
     n_id_medio_pago       : DataTypes.INTEGER,
     n_id_moneda           : DataTypes.INTEGER,
+    n_nr_cuota            : DataTypes.INTEGER,
     n_valor               : DataTypes.FLOAT,
+    n_desc_redondeo       : DataTypes.FLOAT,
     d_fecha_pago          : DataTypes.DATE,
     d_fecha_vcto          : DataTypes.DATE,
   }, {
