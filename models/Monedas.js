@@ -17,7 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     n_decimales                       : {
       type   : DataTypes.INTEGER,
     },
-
+    b_activo                       : {
+      type   : DataTypes.BOOLEAN,
+    },
   }, {
     tableName: 'Monedas',
   });
