@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     n_cuotas_pago             : DataTypes.INTEGER,
     n_dias_Frecuencia_pago    : DataTypes.INTEGER,
     t_observacion             : DataTypes.TEXT,
+    n_total                   : DataTypes.VIRTUAL,
     
   }, {
     tableName: 'Presupuestos',
@@ -62,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey : 'n_id_moneda',
       as         : 'moneda'
     });
-    
+                
     
   };
   

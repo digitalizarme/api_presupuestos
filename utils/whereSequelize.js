@@ -22,7 +22,7 @@ module.exports = (query,tabla) => {
     }
     
   }
-  const tablaComplementar = sortField.indexOf('.') !== -1?'':tabla+'.';
+  const tablaComplementar = sortField && sortField.indexOf('.') !== -1?'':tabla+'.';
   let ordenacion = sortField&&sortOrder
   ?
     [

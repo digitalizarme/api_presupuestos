@@ -4,6 +4,13 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
       return queryInterface.bulkInsert('Frecuencias', [
         {
+          c_descripcion   : 'AL CONTATO',
+          n_cantidad_dias : 1,
+          b_activo        : true,
+          createdAt       : new Date(),
+          updatedAt       : new Date()
+        },
+        {
           c_descripcion   : 'SEMANAL',
           n_cantidad_dias : 7,
           b_activo        : true,
