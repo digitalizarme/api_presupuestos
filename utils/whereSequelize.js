@@ -14,17 +14,19 @@ module.exports = (query,tabla) => {
     for (const columna of columnas) {
         if(columna.searchable || typeof columna.searchable === "undefined")
         {
-            condicion.push(sequelize.where(sequelize.fn("UPPER", sequelize.col(columna.dataField)),{ [Op.like]:`%${searchText.toUpperCase()}%` }));
+          const tablaComplementar = columna.dataField.indexOf('.') !== -1?'':tabla+'.';
+
+            condicion.push(sequelize.where(sequelize.fn("UPPER", sequelize.col(tablaComplementar+columna.dataField)),{ [Op.like]:`%${searchText.toUpperCase()}%` }));
 
         }
     }
     
   }
-  
+  const tablaComplementar = sortField.indexOf('.') !== -1?'':tabla+'.';
   let ordenacion = sortField&&sortOrder
   ?
     [
-      sequelize.literal(`${tabla}.${sortField} COLLATE NOCASE ${sortOrder}`),
+      sequelize.literal(`${tablaComplementar}${sortField} COLLATE NOCASE ${sortOrder}`),
     ]
         
   :
