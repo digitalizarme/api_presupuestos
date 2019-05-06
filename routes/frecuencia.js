@@ -1,26 +1,31 @@
-const { Frecuencia }   = require("../models");
+const { Frecuencias }   = require("../models");
 const { whereSequelize, objetoTabla }     = require('../utils/');
 const { traduceErrores } = require('../utils/');
 
 module.exports = (app, router) => {
 
-    router.get('/frecuencia', async function(context) {  
+    router.get('/frecuencias', async function(context) {  
         const {busca, total} = whereSequelize(context.query);
-        context.body = objetoTabla(await Frecuencia.findAll(busca),await Frecuencia.findAll(total))
+        context.body = objetoTabla(await Frecuencias.findAll(busca),await Frecuencias.findAll(total))
 
     });  
 
-    router.get('/frecuencia/:id', async function(context) {  
+    router.get('/frecuencias/todas', async function(context) {  
+        context.body = await Frecuencias.findAll();
+
+    });  
+
+    router.get('/frecuencias/:id', async function(context) {  
         const id = context.params.id;
-        context.body = await Frecuencia.findOne({where:{id}})        
+        context.body = await Frecuencias.findOne({where:{id}})        
 
     });  
 
-    router.post('/frecuencia', async function(context) {  
+    router.post('/frecuencias', async function(context) {  
         const datos = context.request.body;
         try
         {
-            await Frecuencia.create(datos);
+            await Frecuencias.create(datos);
             context.body = datos;
         }
         catch(error) {
@@ -28,12 +33,12 @@ module.exports = (app, router) => {
         };
     });  
       
-    router.put('/frecuencia', async function(context) {  
+    router.put('/frecuencias', async function(context) {  
         const datos = context.request.body;
         const id = datos.id;
         try
         {
-            await Frecuencia.update( datos , { where: { id } });
+            await Frecuencias.update( datos , { where: { id } });
             context.body = datos;
         }
         catch(error) {
@@ -41,10 +46,10 @@ module.exports = (app, router) => {
         };
     });  
     
-    router.delete('/frecuencia', async function(context) {  
+    router.delete('/frecuencias', async function(context) {  
         try{
             const {id} = context.query;
-            context.body =  await Frecuencia.destroy( { where: { id } });
+            context.body =  await Frecuencias.destroy( { where: { id } });
         }
         catch(error) {
             throw Error(traduceErrores(error))

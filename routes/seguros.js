@@ -1,4 +1,4 @@
-const { Seguros }   = require("../models");
+const { Seguros,Monedas }   = require("../models");
 const { traeTodosSeguros }    = require('../repositories/seguros');
 const { traduceErrores } = require('../utils/');
 
@@ -7,6 +7,15 @@ module.exports = (app, router) => {
     router.get('/seguros', async function(context) {  
         context.body = await traeTodosSeguros(context.query);
 
+    });  
+
+    router.get('/seguros/todos', async function(context) {  
+        context.body = await Seguros.findAll({include: 
+            {
+              model : Monedas,
+              as    : 'moneda',
+            },
+        });
     });  
 
     router.get('/seguros/:id', async function(context) {  

@@ -8,6 +8,10 @@ module.exports = (app, router) => {
         context.body = await getAllPersonas(context.query)
     });  
 
+    router.get('/personas/todas', async function(context) {  
+        context.body = await Personas.findAll();
+    });  
+
     router.get('/personas/:id', async function(context) {  
         const id = context.params.id;
         context.body = await Personas.findOne({where:{id}})        

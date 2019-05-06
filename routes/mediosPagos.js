@@ -6,13 +6,18 @@ module.exports = (app, router) => {
 
     router.get('/mediosPagos', async function(context) {  
         const {busca, total} = whereSequelize(context.query);
-        context.body = objetoTabla(await MediosPagos.findAll(busca),await MediosPagos.findAll(total))
+        context.body = objetoTabla(await MediosPagos.findAll(busca),await MediosPagos.findAll(total));
 
     });  
 
     router.get('/mediosPagos/:id', async function(context) {  
         const id = context.params.id;
-        context.body = await MediosPagos.findOne({where:{id}})        
+        context.body = await MediosPagos.findOne({where:{id}});      
+
+    });  
+
+    router.get('/mediosPagos/todos', async function(context) {  
+        context.body = await MediosPagos.findAll();        
 
     });  
 
