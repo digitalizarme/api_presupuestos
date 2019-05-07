@@ -1,11 +1,18 @@
 const { Presupuestos }   = require("../models");
-const { traeTodosPresupuestos }     = require('../repositories/presupuestos');
+const { traeTodosPresupuestos,traeItemsMercadeirasServicios }     = require('../repositories/presupuestos');
 const { traduceErrores } = require('../utils/');
 
 module.exports = (app, router) => {
 
     router.get('/presupuestos', async function(context) {  
         context.body = await traeTodosPresupuestos(context.query);
+
+    });  
+
+    router.get('/presupuestos/itemsMercaderiasServicios/:idPresupuesto', async function(context) {  
+        const idPresupuesto = context.params.idPresupuesto;
+
+        context.body = await traeItemsMercadeirasServicios(idPresupuesto);
 
     });  
 

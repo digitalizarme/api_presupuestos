@@ -1,6 +1,5 @@
-const { sequelize,ItemsMercaderias,Presupuestos, Personas, Usuarios, Status, Monedas }   = require("../../models");
+const { sequelize,Presupuestos, Personas, Usuarios, Status, Monedas }   = require("../../models");
 const { whereSequelize, objetoTabla }     = require('../../utils');
-
 module.exports = async (query) => {
     const {busca, total} = whereSequelize(query,'Presupuestos');
     const include = 
@@ -29,7 +28,7 @@ module.exports = async (query) => {
             model : Status,
             as    : 'status',
             attributes: ['c_descripcion']
-        }
+        },
     ];
 
     const params = {
