@@ -13,7 +13,7 @@ module.exports = (app, router) => {
     router.get('/acceder/verificaEmail/:email', async function(context) {  
         const c_email = context.params.email.toLowerCase();
         const persona = await Personas.findOne({where:{c_email}});
-        const usuario = await Usuarios.findOne({where:{n_id_persona:persona.id}});
+        const usuario = persona?await Usuarios.findOne({where:{n_id_persona:persona.id}}):false;
         let msg = '';
         if(!persona)
         {
