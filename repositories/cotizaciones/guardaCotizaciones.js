@@ -1,9 +1,8 @@
 
 const { Cotizaciones }   = require("../../models");
 
-module.exports = async (obj) => {
+module.exports = async (monedas) => {
     let dados;
-    const monedas = obj.quotes;
     for (let moneda in monedas) {
         dados = {
             c_monedaOrigemDestino: moneda

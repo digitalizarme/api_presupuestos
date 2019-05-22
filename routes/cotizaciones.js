@@ -5,7 +5,11 @@ const { whereSequelize, objetoTabla }     = require('../utils/');
 
 module.exports = (app, router) => {
 
-    router.get('/cotizaciones/enlinea', async function(context) {  
+    // router.get('/cotizaciones/enlinea', async function(context) {  
+    //     context.body = await enlinea(context.query);
+    // });  
+
+    router.get('/cotizaciones/ultimas', async function(context) {  
         context.body = await enlinea(context.query);
     });  
 

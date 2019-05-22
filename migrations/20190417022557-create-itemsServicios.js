@@ -12,7 +12,6 @@ module.exports = {
       c_descripcion: {
         type: Sequelize.STRING
         ,allowNull: false,
-        unique   : true,
       },
       n_id_presupuesto: {
         allowNull: false,

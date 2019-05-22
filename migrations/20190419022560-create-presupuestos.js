@@ -16,17 +16,6 @@ module.exports = {
         type: Sequelize.INTEGER
         ,allowNull: false,
       },
-      n_id_flete: {
-        type: Sequelize.INTEGER
-        ,allowNull: false,
-      },
-      n_tipo_flete_valor: {
-        type: Sequelize.FLOAT
-      },
-      n_valor_flete: {
-        type: Sequelize.FLOAT
-        ,defaultValue  : 0
-      },
       n_id_persona_comisionista: {
         type: Sequelize.INTEGER
       },
@@ -40,7 +29,7 @@ module.exports = {
       },
       n_id_seguro: {
         type: Sequelize.INTEGER
-        ,allowNull: false,
+        ,allowNull: true,
       },
       n_tipo_seguro_valor: {
         type: Sequelize.FLOAT
@@ -57,21 +46,17 @@ module.exports = {
         type: Sequelize.INTEGER
         ,allowNull: false,
       },
-      n_cotizacion: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
-      },
       n_dias_entrega: {
         type: Sequelize.INTEGER
-        ,allowNull: false,
+        ,defaultValue  : 1
       },
       n_cuotas_pago: {
         type: Sequelize.INTEGER
-        ,allowNull: false,
+        ,defaultValue  : 1
       },
       n_dias_Frecuencia_pago: {
         type: Sequelize.INTEGER
-        ,allowNull: false,
+        ,defaultValue  : 1
       },
       n_desc_redondeo: {
         type: Sequelize.FLOAT

@@ -14,7 +14,7 @@ module.exports = {
         ,validate: {
           notEmpty: false,
           len: {
-            args: [6, 6],
+            args: [7, 7],
           }
         }
       },
