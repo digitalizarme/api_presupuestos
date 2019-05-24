@@ -53,6 +53,23 @@ module.exports = (app, router) => {
             throw Error(traduceErrores(error))
         };
     });  
+
+    router.delete('/presupuestos/item/:id/:tipo', async function(context) {  
+        try{
+            const {id, tipo} = context.params;
+            if(tipo === 'M')
+            {
+                context.body =  await ItemsMercaderias.destroy( { where: { id } });
+            }
+            else
+            {
+                context.body =  await ItemsServicios.destroy( { where: { id } });
+            }
+        }
+        catch(error) {
+            throw Error(traduceErrores(error))
+        };
+    });    
       
     router.put('/presupuestos/item', async function(context) {  
         const datos = context.request.body;
@@ -86,14 +103,6 @@ module.exports = (app, router) => {
         };
     });  
     
-    router.delete('/presupuestos', async function(context) {  
-        try{
-            const {id} = context.query;
-            context.body =  await Presupuestos.destroy( { where: { id } });
-        }
-        catch(error) {
-            throw Error(traduceErrores(error))
-        };
-    });    
 
+    
 };

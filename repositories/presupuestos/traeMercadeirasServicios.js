@@ -30,10 +30,12 @@ module.exports = () => {
                 ,m.n_id_moneda
                 ,mo.c_descripcion AS c_desc_moneda
                 ,mo.c_letras AS c_letras_moneda
+                ,mo.n_decimales AS n_decimales_moneda
                 ,m.n_peso
                 ,f.n_valor as n_flete
                 ,f.n_id_moneda as n_flete_moneda
                 ,mf.c_letras as c_letras_flete_moneda
+                ,mf.n_decimales as n_decimales_flete_moneda
               FROM
                 mercaderias m
                 ,monedas mo
@@ -73,11 +75,12 @@ module.exports = () => {
                 ,s.n_id_moneda
                 ,mo.c_descripcion AS c_desc_moneda
                 ,mo.c_letras AS c_letras_moneda
+                ,mo.n_decimales AS n_decimales_moneda
                 ,0 as n_peso
                 ,0 as n_flete
                 ,0 as n_flete_moneda
                 ,0 as c_letras_flete_moneda
-
+                ,0 as n_decimales_flete_moneda
               FROM
                 servicios s
                 ,monedas mo
