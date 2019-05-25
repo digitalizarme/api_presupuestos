@@ -22,9 +22,9 @@ module.exports = (presupuestoID) => {
                 ,COALESCE(m.n_peso,0) as n_peso
                 ,p.n_id_moneda
                 ,m.t_observacion
-                ,m.b_seguro
+                ,b_seguro
                 ,CASE
-                  WHEN m.b_seguro='true' THEN 'SI'
+                  WHEN m.b_seguro or m.b_seguro==1 THEN 'SI'
                   ELSE 'NO'
                 END AS c_seguro
                 ,m.createdAt
@@ -51,7 +51,7 @@ module.exports = (presupuestoID) => {
                 ,0 as n_peso
                 ,p.n_id_moneda
                 ,s.t_observacion
-                ,'false' as b_seguro
+                ,false as b_seguro
                 ,'NO' as c_seguro
                 ,s.createdAt
                 ,'S' as c_tipo
