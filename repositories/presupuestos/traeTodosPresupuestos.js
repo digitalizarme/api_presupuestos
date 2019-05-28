@@ -22,7 +22,7 @@ module.exports = async (query) => {
         {
             model : Monedas,
             as    : 'moneda',
-            attributes: ['c_descripcion']
+            attributes: ['c_descripcion','n_decimales']
         },
         {
             model : Status,
