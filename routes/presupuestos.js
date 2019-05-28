@@ -26,6 +26,12 @@ module.exports = (app, router) => {
 
     });  
 
+    router.delete('/presupuestos', async function(context) {  
+        const {id} = context.query;
+        context.body = await Presupuestos.destroy( { where: { id } });
+
+    });  
+
     router.post('/presupuestos', async function(context) {  
         const datos = context.request.body;
         try
