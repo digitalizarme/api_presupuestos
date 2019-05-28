@@ -81,7 +81,7 @@ module.exports = async (datos) => {
             }
         })
         .catch(function(error) {
-            throw Error(error.response.data.error);    
+            throw Error(typeof error.response !== "undefined"?error.response.data.error:error);    
 
         });
 

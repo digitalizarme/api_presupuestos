@@ -1,7 +1,7 @@
 
 module.exports = (error) => {
   let erroPadrao;
-  console.log(error,"truduce errores");
+  //console.log(error,"truduce errores");
   if(error.errors && error.errors.length >0)
   {
     console.log(error.errors[0].message);
@@ -29,7 +29,20 @@ module.exports = (error) => {
     default: erroPadrao = error.errors[0].message 
     break;
     }
+    
   }
+  if(typeof error.original.code !== "undefined" && error.original.code === 'SQLITE_CONSTRAINT')
+  {
+    //console.log(error.original);
+    switch (error.original.Error) {
+      case `SQLITE_CONSTRAINT: NOT NULL constraint failed: ItemsMercaderias.n_flete`:
+      erroPadrao = 'Yá existe este nuemro de identificación en el sistema';
+      break;
+      default: "Algum campo obligatorio esta vacio o duplicado" 
+      break;
+      }
+  
+    }
   const erroBanco = error.original && error.original.sqlMessage?error.original.sqlMessage:typeof error.original !== "undefined" && error.original.code==='SQLITE_CONSTRAINT'?'No se pudo eliminar este registro porque esta siendo usado en otras partes del sistema':'Error desconocido';
   const errorMessage = erroPadrao?erroPadrao:erroBanco;
   return (errorMessage)
