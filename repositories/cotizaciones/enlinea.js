@@ -3,10 +3,10 @@ const { Cotizaciones,sequelize,Monedas }        = require("../../models");
 const guardaCotizaciones                = require("./guardaCotizaciones");
 const ultimas                           = require("./ultimas");
 const axios                             = require('axios');
-const { fechaHoyYMD }                   = require('../../utils');
+const { fechaHoyYMDUTC }                   = require('../../utils');
 
 module.exports = async (datos) => {
-    const hoy = fechaHoyYMD();
+    const hoy = fechaHoyYMDUTC();
     let totalMonedas = await Monedas.findOne({
         attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'total']]
       });

@@ -8,5 +8,5 @@ module.exports = {
   traduceErrores: require('./traduceErrores'),
   fechaHoyYMD: require('./fechaHoyYMD'),
   fechaHoyUTC: require('./fechaHoyUTC'),
-  
+  fechaHoyYMDUTC:require('./fechaHoyYMDUTC'),
 };
