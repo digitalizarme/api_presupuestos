@@ -1,7 +1,10 @@
 {
   "development": {
     "dialect": "sqlite",
-    "define": { "charset": "utf8", "dialectOptions": { "collate": "utf8_general_ci" } },
+    "define": {
+      "charset": "utf8",
+      "dialectOptions": { "collate": "utf8_general_ci" }
+    },
     "storage": "./db/database.sqlite3",
     "seederStorage": "sequelize",
     "seederStorageTableName": "SequelizeData",
@@ -17,9 +20,16 @@
     "storage": ":memory"
   },
   "production": {
-    "dialect": "sqlite",
-    "define": { "charset": "utf8", "dialectOptions": { "collate": "utf8_general_ci" } },
-    "storage": "./db/database.sqlite3",
+    "username": "iupcasmebrxthd",
+    "password": "5ca5b771d5169ea3cad4d850f77122edf377a5a53457b8875432931ff29d64e7",
+    "database": "dc4looefbl20qe",
+    "host": "ec2-54-163-226-238.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "port": 5432,
+    "define": {
+      "charset": "utf8",
+      "dialectOptions": { "collate": "utf8_general_ci" }
+    },
     "seederStorage": "sequelize",
     "seederStorageTableName": "SequelizeData",
     "pool": {
