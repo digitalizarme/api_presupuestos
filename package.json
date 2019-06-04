@@ -6,7 +6,7 @@
   "repository": "digitalizarme/api",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ./app.js --env production",
+    "start": "nodemon --config nodemon_prod.json  ./app.js",
     "dev": "nodemon --inspect=0.0.0.0:56745  --config nodemon.json ./app.js",
     "init": "npm install",
     "migrate": "./node_modules/.bin/sequelize db:migrate",

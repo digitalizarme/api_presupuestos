@@ -18,7 +18,8 @@ require('./routes/index.js')(app, router);
 
 
 // Koa
-app.env = process.env.NODE_ENV || 'development';
+app.env = process.env.NODE_ENV;//|| 'development'
+console.log(process.env.NODE_ENV,'process.env.NODE_ENV');
 module.exports = app
   .use(cors())
   .use(morgan('[:date[clf]] :method :url [status: :status] [length: :res[content-length]] - :response-time ms'))
