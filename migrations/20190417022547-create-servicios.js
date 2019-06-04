@@ -51,7 +51,7 @@ module.exports = {
         allowNull: false,
         references: {
           key: "id",
-          model: "monedas"
+          model: "Monedas"
         }
       },
       createdAt: {
