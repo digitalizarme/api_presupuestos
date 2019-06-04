@@ -20,13 +20,8 @@ module.exports = {
     storage: ":memory"
   },
   production: {
-    username: process.env.USERNAME,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE,
-    host: process.env.HOST,
     dialect: "postgres",
-    protocol: 'postgres',
-    use_env_variable: process.env.DATABASE_URL,
+    use_env_variable: "DATABASE_URL",
     port: 5432,
     define: {
       charset: "utf8",
