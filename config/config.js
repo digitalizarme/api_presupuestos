@@ -25,6 +25,8 @@ module.exports = {
     database: process.env.DATABASE,
     host: process.env.HOST,
     dialect: "postgres",
+    protocol: 'postgres',
+    use_env_variable: process.env.DATABASE_URL,
     port: 5432,
     define: {
       charset: "utf8",
