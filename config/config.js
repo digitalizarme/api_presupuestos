@@ -15,10 +15,6 @@ module.exports = {
       idle: 10000
     }
   },
-  test: {
-    dialect: "sqlite",
-    storage: ":memory"
-  },
   production: {
     dialect: "postgres",
     use_env_variable: "DATABASE_URL",
