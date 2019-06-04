@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
         references: {
           key: "id",
-          model: "personas"
+          model: "Personas"
         }
       },
       n_id_usuario: {
@@ -21,14 +21,14 @@ module.exports = {
         allowNull: false,
         references: {
           key: "id",
-          model: "usuarios"
+          model: "Usuarios"
         }
       },
       n_id_persona_comisionista: {
         type: Sequelize.INTEGER,
         references: {
           key: "id",
-          model: "personas"
+          model: "Personas"
         }
       },
 
@@ -45,7 +45,7 @@ module.exports = {
         allowNull: true,
         references: {
           key: "id",
-          model: "seguros"
+          model: "Seguros"
         }
       },
       n_tipo_seguro_valor: {
@@ -60,7 +60,7 @@ module.exports = {
         allowNull: false,
         references: {
           key: "id",
-          model: "status"
+          model: "Status"
         }
       },
       n_id_moneda: {
@@ -68,7 +68,7 @@ module.exports = {
         allowNull: false,
         references: {
           key: "id",
-          model: "monedas"
+          model: "Monedas"
         }
       },
       n_dias_entrega: {

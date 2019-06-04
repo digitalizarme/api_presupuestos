@@ -26,7 +26,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           key: "id",
-          model: "mercaderiasMarcas"
+          model: "MercaderiasMarcas"
         }
       },
       n_id_grupo: {
@@ -34,7 +34,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           key: "id",
-          model: "mercaderiasGrupos"
+          model: "MercaderiasGrupos"
         }
       },
       n_id_subgrupo: {
@@ -42,7 +42,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           key: "id",
-          model: "mercaderiasSubGrupos"
+          model: "MercaderiasSubGrupos"
         }
       },
       n_iva: {
@@ -54,7 +54,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           key: "id",
-          model: "monedas"
+          model: "Monedas"
         }
       },
       n_costo: {

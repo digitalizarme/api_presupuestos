@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false,
         references: {
           key: "id",
-          model: "serviciosGrupos"
+          model: "ServiciosGrupos"
         }
       },
       b_activo: {

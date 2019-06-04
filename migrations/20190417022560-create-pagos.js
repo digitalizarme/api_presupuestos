@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           key: "id",
-          model: "presupuestos"
+          model: "Presupuestos"
         }
       },
       n_id_persona_baja: {
@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           key: "id",
-          model: "personas"
+          model: "Personas"
         }
       },
       n_id_medio_pago: {
@@ -29,7 +29,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           key: "id",
-          model: "mediosPagos"
+          model: "MediosPagos"
         }
       },
       n_id_moneda: {
@@ -37,7 +37,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           key: "id",
-          model: "monedas"
+          model: "Monedas"
         }
       },
       n_valor: {

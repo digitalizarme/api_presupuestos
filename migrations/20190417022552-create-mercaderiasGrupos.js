@@ -18,7 +18,7 @@ module.exports = {
         allowNull: false,
         references: {
           key: "id",
-          model: "fletes"
+          model: "Fletes"
         }
       },
       b_activo: {

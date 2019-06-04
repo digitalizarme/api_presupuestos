@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           key: "id",
-          model: "personas"
+          model: "Personas"
         },
         validate: {
           notEmpty: false
