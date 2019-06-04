@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('MercaderiasSubGrupos', {
+    return queryInterface.createTable("MercaderiasMarcas", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,14 +9,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       c_descripcion: {
-        type: Sequelize.STRING
-        ,allowNull: false,
-        unique   : true,
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
       },
       b_activo: {
-        type: Sequelize.BOOLEAN
-        ,allowNull: false
-        ,defaultValue  : false
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,
@@ -29,6 +29,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('MercaderiasSubGrupos');
+    return queryInterface.dropTable("MercaderiasMarcas");
   }
 };

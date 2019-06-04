@@ -1,8 +1,7 @@
-
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('ItemsMercaderias', {
+    return queryInterface.createTable("ItemsMercaderias", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,12 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       c_descripcion: {
-        type: Sequelize.STRING
-        ,allowNull: false,
+        type: Sequelize.STRING,
+        allowNull: false
       },
       n_id_presupuesto: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          key: "id",
+          model: "presupuestos"
+        }
       },
       n_cantidad: {
         allowNull: false,
@@ -26,29 +29,37 @@ module.exports = {
         type: Sequelize.FLOAT
       },
       n_exentas: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
       n_gravadas_5: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
       n_gravadas_10: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
       n_peso: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
       n_flete: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      n_cotizacion: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      c_monedaOrigemDestino: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       b_seguro: {
-        type: Sequelize.BOOLEAN
-        ,allowNull: false
-        ,defaultValue  : false
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
       },
       t_observacion: {
         type: Sequelize.TEXT
@@ -64,6 +75,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('ItemsMercaderias');
+    return queryInterface.dropTable("ItemsMercaderias");
   }
 };

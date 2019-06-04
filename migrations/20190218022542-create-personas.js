@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Personas', {
+    return queryInterface.createTable("Personas", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,31 +10,30 @@ module.exports = {
       },
       c_nombre: {
         allowNull: false,
-        type: Sequelize.STRING
-        ,validate: {
+        type: Sequelize.STRING,
+        validate: {
           notEmpty: false,
           len: {
-            args: [5, 50],
+            args: [5, 50]
           }
         }
       },
       c_identificacion: {
         allowNull: false,
         type: Sequelize.STRING,
-        unique:true
-        ,validate: {
+        unique: true,
+        validate: {
           notEmpty: false,
           len: {
-            args: [5, 50],
+            args: [5, 50]
           }
         }
-
       },
       c_email: {
         allowNull: false,
-        type     : Sequelize.STRING,
-        unique   : true,
-        validate : {
+        type: Sequelize.STRING,
+        unique: true,
+        validate: {
           notEmpty: false,
           isEmail: true
         }
@@ -47,14 +46,13 @@ module.exports = {
       },
       c_cel1: {
         allowNull: false,
-        type: Sequelize.STRING
-        ,validate: {
+        type: Sequelize.STRING,
+        validate: {
           notEmpty: false,
           len: {
-            args: [5, 50],
+            args: [5, 50]
           }
         }
-
       },
       c_cel2: {
         type: Sequelize.STRING
@@ -64,41 +62,36 @@ module.exports = {
       },
       c_direccion: {
         allowNull: false,
-        type: Sequelize.STRING
-        ,validate: {
+        type: Sequelize.STRING,
+        validate: {
           notEmpty: false,
           len: {
-            args: [5, 100],
+            args: [5, 100]
           }
         }
-
       },
       n_valor_porcentaje_comision: {
         type: Sequelize.FLOAT
       },
       b_activo: {
-        type: Sequelize.BOOLEAN
-        ,defaultValue  : false
-
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       b_cliente: {
-        type: Sequelize.BOOLEAN
-        ,defaultValue  : false
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       b_comisionista: {
-        type: Sequelize.BOOLEAN
-        ,defaultValue  : false
-
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       b_funcionario: {
-        type: Sequelize.BOOLEAN
-        ,defaultValue  : false
-
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       b_usuario: {
-        type: Sequelize.BOOLEAN
-        ,defaultValue  : false
-
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       t_observacion: {
         type: Sequelize.TEXT
@@ -114,6 +107,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Personas');
+    return queryInterface.dropTable("Personas");
   }
 };

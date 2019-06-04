@@ -1,8 +1,7 @@
-
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Fletes', {
+    return queryInterface.createTable("Fletes", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,22 +9,26 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       c_tipo: {
-        type: Sequelize.STRING
-        ,allowNull: false,
-        unique   : true,
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
       },
       n_id_moneda: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          key: "id",
+          model: "monedas"
+        }
       },
       b_activo: {
-        type: Sequelize.BOOLEAN
-        ,allowNull: false
-        ,defaultValue  : false
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
       },
       n_valor: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -38,6 +41,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Fletes');
+    return queryInterface.dropTable("Fletes");
   }
 };

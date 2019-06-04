@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Cotizaciones', {
+    return queryInterface.createTable("Cotizaciones", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,18 +9,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       c_monedaOrigemDestino: {
-        type: Sequelize.STRING
-        ,allowNull: false
-        ,validate: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
           notEmpty: false,
           len: {
-            args: [7, 7],
+            args: [7, 7]
           }
         }
       },
       n_valor: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -33,6 +33,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Cotizaciones');
+    return queryInterface.dropTable("Cotizaciones");
   }
 };

@@ -1,8 +1,7 @@
-
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('ItemsServicios', {
+    return queryInterface.createTable("ItemsServicios", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,12 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       c_descripcion: {
-        type: Sequelize.STRING
-        ,allowNull: false,
+        type: Sequelize.STRING,
+        allowNull: false
       },
       n_id_presupuesto: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          key: "id",
+          model: "presupuestos"
+        }
       },
       n_cantidad: {
         allowNull: false,
@@ -26,16 +29,24 @@ module.exports = {
         type: Sequelize.FLOAT
       },
       n_exentas: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
       n_gravadas_5: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
       n_gravadas_10: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      n_cotizacion: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      c_monedaOrigemDestino: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       t_observacion: {
         type: Sequelize.TEXT
@@ -51,6 +62,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('ItemsServicios');
+    return queryInterface.dropTable("ItemsServicios");
   }
 };

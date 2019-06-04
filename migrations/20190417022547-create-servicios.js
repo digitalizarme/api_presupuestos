@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Servicios', {
+    return queryInterface.createTable("Servicios", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,42 +9,50 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       c_descripcion: {
-        type: Sequelize.STRING
-        ,allowNull: false,
-        unique   : true,
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
       },
       c_unidad: {
-        type: Sequelize.STRING
-        ,allowNull: false,
+        type: Sequelize.STRING,
+        allowNull: false
       },
       n_id_grupo: {
-        type: Sequelize.INTEGER
-        ,allowNull: false,
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          key: "id",
+          model: "serviciosGrupos"
+        }
       },
       b_activo: {
-        type: Sequelize.BOOLEAN
-        ,allowNull: false
-        ,defaultValue  : false
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
       },
       t_observacion: {
-        type: Sequelize.TEXT
-        ,allowNull: true,
+        type: Sequelize.TEXT,
+        allowNull: true
       },
       n_comision: {
-        type: Sequelize.FLOAT
-        ,allowNull: true,
+        type: Sequelize.FLOAT,
+        allowNull: true
       },
       n_iva: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
       n_valor: {
-        type: Sequelize.FLOAT
-        ,allowNull: false,
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
       n_id_moneda: {
-        type: Sequelize.INTEGER
-        ,allowNull: false,
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          key: "id",
+          model: "monedas"
+        }
       },
       createdAt: {
         allowNull: false,
@@ -57,6 +65,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Servicios');
+    return queryInterface.dropTable("Servicios");
   }
 };

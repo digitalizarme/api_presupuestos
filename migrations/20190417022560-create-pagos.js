@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Pagos', {
+    return queryInterface.createTable("Pagos", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,19 +10,35 @@ module.exports = {
       },
       n_id_presupuesto: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          key: "id",
+          model: "presupuestos"
+        }
       },
       n_id_persona_baja: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          key: "id",
+          model: "personas"
+        }
       },
       n_id_medio_pago: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          key: "id",
+          model: "mediosPagos"
+        }
       },
       n_id_moneda: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          key: "id",
+          model: "monedas"
+        }
       },
       n_valor: {
         allowNull: false,
@@ -47,6 +63,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Pagos');
+    return queryInterface.dropTable("Pagos");
   }
 };

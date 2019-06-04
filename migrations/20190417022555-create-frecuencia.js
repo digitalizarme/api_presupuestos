@@ -1,8 +1,7 @@
-
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Frecuencias', {
+    return queryInterface.createTable("Frecuencias", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,18 +9,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       c_descripcion: {
-        type: Sequelize.STRING
-        ,allowNull: false,
-        unique   : true,
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
       },
       n_cantidad_dias: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
       b_activo: {
-        type: Sequelize.BOOLEAN
-        ,allowNull: false
-        ,defaultValue  : false
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,
@@ -34,6 +33,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Frecuencias');
+    return queryInterface.dropTable("Frecuencias");
   }
 };

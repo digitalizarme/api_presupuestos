@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Usuarios', {
+    return queryInterface.createTable("Usuarios", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,31 +12,31 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          key: 'id',
-          model: 'personas',
-        }
-        ,validate: {
-          notEmpty: false,
+          key: "id",
+          model: "personas"
+        },
+        validate: {
+          notEmpty: false
         }
       },
       c_usuario: {
         allowNull: false,
-        type: Sequelize.STRING
-        ,unique   : true
-        ,validate: {
+        type: Sequelize.STRING,
+        unique: true,
+        validate: {
           notEmpty: false,
           len: {
-            args: [5, 50],
+            args: [5, 50]
           }
         }
       },
       c_contrasena: {
         allowNull: false,
-        type: Sequelize.STRING
-        ,validate: {
+        type: Sequelize.STRING,
+        validate: {
           notEmpty: false,
           len: {
-            args: [5, 50],
+            args: [5, 50]
           }
         }
       },
@@ -45,34 +45,28 @@ module.exports = {
       },
       b_activo: {
         allowNull: false,
-        type: Sequelize.BOOLEAN
-        ,defaultValue  : false
-
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       b_administrador: {
-        type: Sequelize.BOOLEAN
-        ,defaultValue  : false
-
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       b_cadastrar: {
-        type: Sequelize.BOOLEAN
-        ,defaultValue  : false
-
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       b_editar: {
-        type: Sequelize.BOOLEAN
-        ,defaultValue  : false
-
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       b_eliminar: {
-        type: Sequelize.BOOLEAN
-        ,defaultValue  : false
-
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       b_imprimir: {
-        type: Sequelize.BOOLEAN
-        ,defaultValue  : false
-
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,
@@ -85,6 +79,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Usuarios');
+    return queryInterface.dropTable("Usuarios");
   }
 };
