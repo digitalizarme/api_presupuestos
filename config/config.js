@@ -32,6 +32,9 @@ module.exports = {
     },
     seederStorage: "sequelize",
     seederStorageTableName: "SequelizeData",
+    dialectOptions: {
+      ssl: true
+    },
     pool: {
       max: 5,
       min: 0,
