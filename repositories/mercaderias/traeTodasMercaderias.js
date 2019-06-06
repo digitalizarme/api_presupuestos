@@ -2,7 +2,7 @@ const { sequelize,Mercaderias, MercaderiasSubGrupos,MercaderiasGrupos,Mercaderia
 const { whereSequelize, objetoTabla }     = require('../../utils');
 
 module.exports = async (query) => {
-    const {busca, total} = whereSequelize(query,'"Mercaderias"');
+    const {busca, total} = whereSequelize(query,'Mercaderias');
 
     const params = {
         ...busca,
