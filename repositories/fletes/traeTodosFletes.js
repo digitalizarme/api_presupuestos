@@ -16,7 +16,7 @@ module.exports = async (query) => {
         ],
         attributes: { 
             include: [
-                [sequelize.literal('CASE WHEN Fletes.b_activo = true THEN "SÍ" ELSE "NO" END'), 'c_activo']
+                [sequelize.literal(`CASE WHEN "Fletes".b_activo = true THEN 'SÍ' ELSE 'NO' END`), 'c_activo']
             ] 
         },
     }

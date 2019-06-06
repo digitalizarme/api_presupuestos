@@ -15,7 +15,7 @@ module.exports = (presupuestoID) => {
                 ,m.c_descripcion 
                 ,m.n_cantidad
                 ,m.n_unitario
-                ,ROUND(m.n_flete,2) as n_flete
+                ,ROUND(cast(m.n_flete as numeric),2) as n_flete
                 ,COALESCE(m.n_exentas,0) as n_exentas
                 ,COALESCE(m.n_gravadas_5,0) as n_gravadas_5
                 ,COALESCE(m.n_gravadas_10,0) as n_gravadas_10
@@ -24,14 +24,14 @@ module.exports = (presupuestoID) => {
                 ,m.t_observacion
                 ,b_seguro
                 ,CASE
-                  WHEN m.b_seguro or m.b_seguro==1 THEN 'SI'
+                  WHEN m.b_seguro THEN 'SI'
                   ELSE 'NO'
                 END AS c_seguro
-                ,m.createdAt
+                ,m."createdAt"
                 ,'M' as c_tipo
               FROM
-                ItemsMercaderias m
-                ,Presupuestos p
+                public."ItemsMercaderias" m
+                ,public."Presupuestos" p
               WHERE
                 m.n_id_presupuesto = p.id
                 AND p.id = ${presupuestoID}
@@ -53,11 +53,11 @@ module.exports = (presupuestoID) => {
                 ,s.t_observacion
                 ,false as b_seguro
                 ,'NO' as c_seguro
-                ,s.createdAt
+                ,s."createdAt"
                 ,'S' as c_tipo
               FROM
-                ItemsServicios s
-                ,Presupuestos p
+                public."ItemsServicios" s
+                ,public."Presupuestos" p
               WHERE
                 s.n_id_presupuesto = p.id
                 AND p.id = ${presupuestoID}

@@ -13,12 +13,12 @@ module.exports = async (query) => {
         },
         attributes: { 
             include: [
-                [sequelize.literal('CASE WHEN Usuarios.b_activo = true THEN "SÍ" ELSE "NO" END'), 'c_activo']
-                ,[sequelize.literal('CASE WHEN b_administrador = true THEN "SÍ" ELSE "NO" END'), 'c_administrador']
-                ,[sequelize.literal('CASE WHEN b_cadastrar = true THEN "SÍ" ELSE "NO" END'), 'c_cadastrar']
-                ,[sequelize.literal('CASE WHEN b_editar = true THEN "SÍ" ELSE "NO" END'), 'c_editar']
-                ,[sequelize.literal('CASE WHEN b_eliminar = true THEN "SÍ" ELSE "NO" END'), 'c_eliminar']
-                ,[sequelize.literal('CASE WHEN b_imprimir = true THEN "SÍ" ELSE "NO" END'), 'c_imprimir']
+                [sequelize.literal(`CASE WHEN "Usuarios".b_activo THEN 'SÍ' ELSE 'NO' END`), `c_activo`]
+                ,[sequelize.literal(`CASE WHEN b_administrador THEN 'SÍ' ELSE 'NO' END`), `c_administrador`]
+                ,[sequelize.literal(`CASE WHEN b_cadastrar THEN 'SÍ' ELSE 'NO' END`), `c_cadastrar`]
+                ,[sequelize.literal(`CASE WHEN b_editar THEN 'SÍ' ELSE 'NO' END`), `c_editar`]
+                ,[sequelize.literal(`CASE WHEN b_eliminar THEN 'SÍ' ELSE 'NO' END`), `c_eliminar`]
+                ,[sequelize.literal(`CASE WHEN b_imprimir THEN 'SÍ' ELSE 'NO' END`), `c_imprimir`]
             ] 
         },
     }

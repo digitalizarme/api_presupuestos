@@ -1,30 +1,33 @@
-'use strict';
+"use strict";
 
 module.exports = (sequelize, DataTypes) => {
-  const ItemsServicios = sequelize.define('ItemsServicios', {
-    c_descripcion                       : {
-      type   : DataTypes.STRING,
+  const ItemsServicios = sequelize.define(
+    "ItemsServicios",
+    {
+      c_descripcion: {
+        type: DataTypes.STRING
+      },
+      n_id_presupuesto: DataTypes.INTEGER,
+      n_cantidad: DataTypes.FLOAT,
+      n_unitario: DataTypes.FLOAT,
+      n_exentas: DataTypes.FLOAT,
+      n_gravadas_5: DataTypes.FLOAT,
+      n_gravadas_10: DataTypes.FLOAT,
+      n_cotizacion: DataTypes.FLOAT,
+      c_monedaOrigemDestino: DataTypes.STRING,
+      t_observacion: DataTypes.TEXT
     },
-    n_id_presupuesto: DataTypes.INTEGER,
-    n_cantidad      : DataTypes.FLOAT,
-    n_unitario      : DataTypes.FLOAT,
-    n_exentas       : DataTypes.FLOAT,
-    n_gravadas_5    : DataTypes.FLOAT,
-    n_gravadas_10   : DataTypes.FLOAT,
-    t_observacion   : DataTypes.TEXT,
-  }, {
-    tableName: 'ItemsServicios',
-  });
+    {
+      tableName: "ItemsServicios"
+    }
+  );
 
-  ItemsServicios.associate = (models) => {
-
+  ItemsServicios.associate = models => {
     ItemsServicios.belongsTo(models.Presupuestos, {
-      foreignKey : 'n_id_presupuesto',
-      as         : 'presupuesto'
+      foreignKey: "n_id_presupuesto",
+      as: "presupuesto"
     });
-    
   };
-
 
   return ItemsServicios;
 };

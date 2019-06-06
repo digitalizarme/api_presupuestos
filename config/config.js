@@ -1,11 +1,15 @@
 module.exports = {
   development: {
-    dialect: "sqlite",
+    dialect: "postgres",
+    database:'presupuestos',
+    username:'postgres',
+    password:'52425242',
+    host:'localhost',
     define: {
       charset: "utf8",
       dialectOptions: { collate: "utf8_general_ci" }
     },
-    storage: "./db/database.sqlite3",
+    port: 5432,
     seederStorage: "sequelize",
     seederStorageTableName: "SequelizeData",
     pool: {

@@ -23,7 +23,7 @@ module.exports = async (datos) => {
             ]
             ,where: {
               $and: [
-                sequelize.where(sequelize.fn('strftime', sequelize.literal(`"%Y-%m-%d"`),sequelize.col('createdAt')), hoy),
+                sequelize.where(sequelize.fn('to_char', sequelize.col('"Cotizaciones"."createdAt"'),sequelize.literal(`'YYYY-MM-DD'`)), hoy),
                 { c_monedaOrigemDestino:moneda }
               ]
             }

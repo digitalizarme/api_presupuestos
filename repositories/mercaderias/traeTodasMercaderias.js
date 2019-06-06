@@ -2,7 +2,7 @@ const { sequelize,Mercaderias, MercaderiasSubGrupos,MercaderiasGrupos,Mercaderia
 const { whereSequelize, objetoTabla }     = require('../../utils');
 
 module.exports = async (query) => {
-    const {busca, total} = whereSequelize(query,'Mercaderias');
+    const {busca, total} = whereSequelize(query,'"Mercaderias"');
 
     const params = {
         ...busca,
@@ -31,7 +31,7 @@ module.exports = async (query) => {
         ],
         attributes: { 
             include: [
-                [sequelize.literal('CASE WHEN Mercaderias.b_activo = true THEN "SÍ" ELSE "NO" END'), 'c_activo']
+                [sequelize.literal(`CASE WHEN "Mercaderias".b_activo THEN 'SÍ' ELSE 'NO' END`), 'c_activo']
             ] 
         },
     }

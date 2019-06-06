@@ -37,11 +37,11 @@ module.exports = () => {
                 ,mf.c_letras as c_letras_flete_moneda
                 ,mf.n_decimales as n_decimales_flete_moneda
               FROM
-                mercaderias m
-                ,monedas mo
-                ,mercaderiasGrupos mg
-                ,fletes f
-                ,monedas mf
+                public."Mercaderias" m
+                ,public."Monedas" mo
+                ,public."MercaderiasGrupos" mg
+                ,public."Fletes" f
+                ,public."Monedas" mf
               WHERE
                 m.n_id_moneda = mo.id
                 AND m.n_id_grupo = mg.id
@@ -79,11 +79,11 @@ module.exports = () => {
                 ,0 as n_peso
                 ,0 as n_flete
                 ,0 as n_flete_moneda
-                ,0 as c_letras_flete_moneda
+                ,'' as c_letras_flete_moneda
                 ,0 as n_decimales_flete_moneda
               FROM
-                servicios s
-                ,monedas mo
+                public."Servicios" s
+                ,public."Monedas" mo
               WHERE
                 s.n_id_moneda = mo.id
 
