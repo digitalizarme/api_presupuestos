@@ -29,6 +29,7 @@ module.exports = (presupuestoID) => {
                 END AS c_seguro
                 ,m."createdAt"
                 ,'M' as c_tipo
+                ,m.n_cotizacion
               FROM
                 public."ItemsMercaderias" m
                 ,public."Presupuestos" p
@@ -55,6 +56,7 @@ module.exports = (presupuestoID) => {
                 ,'NO' as c_seguro
                 ,s."createdAt"
                 ,'S' as c_tipo
+                ,s.n_cotizacion
               FROM
                 public."ItemsServicios" s
                 ,public."Presupuestos" p

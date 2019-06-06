@@ -56,10 +56,10 @@ module.exports = (query, tabla) => {
     }
   }
   const tablaComplementar =
-    sortField && sortField.indexOf(".") !== -1 ? "" : `"${tabla}"`;
+    sortField && sortField.indexOf(".") !== -1 ? "" : `"${tabla}".`;
   let ordenacion =
     sortField && sortOrder
-      ? [sequelize.literal(`${tablaComplementar}."${sortField}" ${sortOrder}`)]
+      ? [sequelize.literal(`${tablaComplementar}"${sortField}" ${sortOrder}`)]
       : [sequelize.literal(`"${tabla}"."updatedAt" desc`)];
   for (let index = 1; index < camposOrdenar.length; index++) {
     const ordenar = camposOrdenar[index];
