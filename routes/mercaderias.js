@@ -1,4 +1,4 @@
-const { Mercaderias }   = require("../models");
+const { Mercaderias, MercaderiasMarcas, MercaderiasSubGrupos }   = require("../models");
 const { traduceErrores } = require('../utils/');
 const { traeTodasMercaderias }    = require('../repositories/mercaderias');
 
@@ -20,6 +20,14 @@ module.exports = (app, router) => {
         const datos = context.request.body;
         try
         {
+            if(isNaN(datos.n_id_marca))
+            {
+                await MercaderiasMarcas.create({c_descripcion:datos.n_id_marca}).then(model => (datos.n_id_marca = model.id))
+            }
+            if(isNaN(datos.n_id_subgrupo))
+            {
+                await MercaderiasSubGrupos.create({c_descripcion:datos.n_id_subgrupo}).then(model => (datos.n_id_subgrupo = model.id))
+            }
             await Mercaderias.create(datos);
             context.body = datos;
         }
@@ -33,6 +41,14 @@ module.exports = (app, router) => {
         const id = datos.id;
         try
         {
+            if(isNaN(datos.n_id_marca))
+            {
+                await MercaderiasMarcas.create({c_descripcion:datos.n_id_marca}).then(model => (datos.n_id_marca = model.id))
+            }
+            if(isNaN(datos.n_id_subgrupo))
+            {
+                await MercaderiasSubGrupos.create({c_descripcion:datos.n_id_subgrupo}).then(model => (datos.n_id_subgrupo = model.id))
+            }
             await Mercaderias.update( datos , { where: { id } });
             context.body = datos;
         }

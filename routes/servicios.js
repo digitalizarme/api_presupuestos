@@ -1,4 +1,4 @@
-const { Servicios }             = require("../models");
+const { Servicios, ServiciosGrupos }             = require("../models");
 const { traeTodosServicios }    = require('../repositories/servicios');
 const { traduceErrores }        = require('../utils/');
 
@@ -16,11 +16,15 @@ module.exports = (app, router) => {
     });  
 
     router.post('/servicios', async function(context) {  
-        const datos = context.request.body;
+        let datos = context.request.body;
         try
         {
-            await Servicios.create(datos);
-            context.body = datos;
+            if(isNaN(datos.n_id_grupo))
+            {
+                await ServiciosGrupos.create({c_descripcion:datos.n_id_grupo}).then(model => (datos.n_id_grupo = model.id))
+            }
+            await Servicios.create(datos).then(model => context.body = model);
+            
         }
         catch(error) {
             throw Error(traduceErrores(error))
@@ -32,6 +36,10 @@ module.exports = (app, router) => {
         const id = datos.id;
         try
         {
+            if(isNaN(datos.n_id_grupo))
+            {
+                await ServiciosGrupos.create({c_descripcion:datos.n_id_grupo}).then(model => (datos.n_id_grupo = model.id))
+            }
             await Servicios.update( datos , { where: { id } });
             context.body = datos;
         }

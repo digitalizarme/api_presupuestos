@@ -36,6 +36,7 @@ module.exports = () => {
                 ,f.n_id_moneda as n_flete_moneda
                 ,mf.c_letras as c_letras_flete_moneda
                 ,mf.n_decimales as n_decimales_flete_moneda
+                ,mg.n_id_flete
               FROM
                 public."Mercaderias" m
                 ,public."Monedas" mo
@@ -81,6 +82,7 @@ module.exports = () => {
                 ,0 as n_flete_moneda
                 ,'' as c_letras_flete_moneda
                 ,0 as n_decimales_flete_moneda
+                ,0 as n_id_flete
               FROM
                 public."Servicios" s
                 ,public."Monedas" mo
