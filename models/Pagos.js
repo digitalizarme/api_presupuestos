@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     n_valor               : DataTypes.FLOAT,
     n_desc_redondeo       : DataTypes.FLOAT,
     d_fecha_pago          : DataTypes.DATE,
-    d_fecha_vcto          : DataTypes.DATE,
+    d_fecha_vcto          : DataTypes.DATEONLY,
   }, {
     tableName: 'Pagos',
   });

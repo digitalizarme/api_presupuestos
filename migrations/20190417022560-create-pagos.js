@@ -17,7 +17,6 @@ module.exports = {
         }
       },
       n_id_persona_baja: {
-        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           key: "id",
@@ -25,7 +24,6 @@ module.exports = {
         }
       },
       n_id_medio_pago: {
-        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           key: "id",
@@ -45,12 +43,11 @@ module.exports = {
         type: Sequelize.FLOAT
       },
       d_fecha_pago: {
-        allowNull: false,
         type: Sequelize.DATE
       },
       d_fecha_vcto: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       createdAt: {
         allowNull: false,
