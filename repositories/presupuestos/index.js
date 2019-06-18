@@ -4,5 +4,6 @@ module.exports = {
   traeMercadeirasServicios:require('./traeMercadeirasServicios'),
   traePresupuesto:require('./traePresupuesto'),
   traeTotalesPresupuesto:require('./traeTotalesPresupuesto'),
-  generaCuotas: require('./generaCuotas')
+  generaCuotas: require('./generaCuotas'),
+  atualizaCuotas: require('./atualizaCuotas'),
 }

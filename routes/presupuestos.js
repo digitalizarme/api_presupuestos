@@ -1,5 +1,12 @@
 const {Presupuestos, ItemsMercaderias, ItemsServicios, Pagos} = require("../models");
-const {traeTodosPresupuestos, traePresupuesto, traeItemsMercadeirasServicios, traeMercadeirasServicios, generaCuotas} = require("../repositories/presupuestos");
+const {
+    traeTodosPresupuestos,
+    traePresupuesto,
+    traeItemsMercadeirasServicios,
+    traeMercadeirasServicios,
+    generaCuotas,
+    atualizaCuotas
+} = require("../repositories/presupuestos");
 const {traduceErrores} = require("../utils/");
 
 module.exports = (app, router) => {
@@ -42,6 +49,7 @@ module.exports = (app, router) => {
     router.post("/presupuestos", async function (context) {
         const datos = context.request.body;
         try {
+            await atualizaCuotas(datos.cuotas);
             await Presupuestos
                 .create(datos)
                 .then(model => (context.body = model));
@@ -129,6 +137,7 @@ module.exports = (app, router) => {
         const datos = context.request.body;
         const id = datos.id;
         try {
+            await atualizaCuotas(datos.cuotas);
             await Presupuestos.update(datos, {where: {
                     id
                 }});
@@ -137,5 +146,5 @@ module.exports = (app, router) => {
             throw Error(traduceErrores(error));
         }
     });
-    
+
 };
