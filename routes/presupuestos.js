@@ -49,13 +49,25 @@ module.exports = (app, router) => {
     router.post("/presupuestos", async function (context) {
         const datos = context.request.body;
         try {
-            if(datos.cuotas)
-            {
-              await atualizaCuotas(datos.cuotas);
+            if (datos.cuotas && datos.cuotas.length > 0) {
+                await atualizaCuotas(datos.cuotas);
             }
             await Presupuestos
                 .create(datos)
                 .then(model => (context.body = model));
+        } catch (error) {
+            throw Error(traduceErrores(error));
+        }
+    });
+
+    router.delete("/presupuestos/cuotas/:n_id_presupuesto", async function (context) {
+        const n_id_presupuesto = context.params.n_id_presupuesto;
+        try {
+            await Pagos.destroy({where: {
+                    n_id_presupuesto
+                }});
+            context.body = [];
+
         } catch (error) {
             throw Error(traduceErrores(error));
         }
@@ -140,11 +152,10 @@ module.exports = (app, router) => {
         const datos = context.request.body;
         const id = datos.id;
         try {
-          if(datos.cuotas)
-          {
-            await atualizaCuotas(datos.cuotas);
-          }
-          await Presupuestos.update(datos, {where: {
+            if (datos.cuotas && datos.cuotas.length > 0) {
+                await atualizaCuotas(datos.cuotas);
+            }
+            await Presupuestos.update(datos, {where: {
                     id
                 }});
             context.body = datos;
