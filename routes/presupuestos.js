@@ -49,7 +49,10 @@ module.exports = (app, router) => {
     router.post("/presupuestos", async function (context) {
         const datos = context.request.body;
         try {
-            await atualizaCuotas(datos.cuotas);
+            if(datos.cuotas)
+            {
+              await atualizaCuotas(datos.cuotas);
+            }
             await Presupuestos
                 .create(datos)
                 .then(model => (context.body = model));
@@ -137,8 +140,11 @@ module.exports = (app, router) => {
         const datos = context.request.body;
         const id = datos.id;
         try {
+          if(datos.cuotas)
+          {
             await atualizaCuotas(datos.cuotas);
-            await Presupuestos.update(datos, {where: {
+          }
+          await Presupuestos.update(datos, {where: {
                     id
                 }});
             context.body = datos;
