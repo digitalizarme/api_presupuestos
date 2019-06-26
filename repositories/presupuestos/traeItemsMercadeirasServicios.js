@@ -15,7 +15,7 @@ module.exports = (presupuestoID) => {
                 ,m.c_descripcion 
                 ,m.n_cantidad
                 ,m.n_unitario
-                ,ROUND(cast(m.n_flete as numeric),2) as n_flete
+                ,COALESCE(cast(m.n_flete as numeric),0)::float as n_flete
                 ,COALESCE(m.n_exentas,0) as n_exentas
                 ,COALESCE(m.n_gravadas_5,0) as n_gravadas_5
                 ,COALESCE(m.n_gravadas_10,0) as n_gravadas_10

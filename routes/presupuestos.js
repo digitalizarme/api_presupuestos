@@ -31,6 +31,11 @@ module.exports = (app, router) => {
 
     router.delete("/presupuestos", async function (context) {
         const {id} = context.query;
+        await Pagos.destroy({
+            where: {
+                n_id_presupuesto: id
+            }
+        });
         await ItemsMercaderias.destroy({
             where: {
                 n_id_presupuesto: id
@@ -76,7 +81,9 @@ module.exports = (app, router) => {
     router.get("/presupuestos/cuotas/:n_id_presupuesto", async function (context) {
         const n_id_presupuesto = context.params.n_id_presupuesto;
         try {
-            context.body = await Pagos.findAll({where: {
+            context.body = await Pagos.findAll({
+                order: ['n_nr_cuota']
+                ,where: {
                     n_id_presupuesto
                 }});
 

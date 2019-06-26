@@ -1,4 +1,4 @@
-const { sequelize,Presupuestos,Monedas }   = require("../../models");
+const { sequelize,Presupuestos,Monedas, Personas }   = require("../../models");
 module.exports = async (id) => {
 
     const include = 
@@ -6,6 +6,10 @@ module.exports = async (id) => {
         {
             model : Monedas,
             as    : 'moneda',
+        },
+        {
+            model : Personas,
+            as    : 'persona',
         },
     ];
 
