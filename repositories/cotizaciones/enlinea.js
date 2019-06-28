@@ -1,5 +1,8 @@
 
-const { Cotizaciones,sequelize,Monedas }        = require("../../models");
+const { Cotizaciones,Monedas }        = require("../../models");
+const sequelize     = require('sequelize');
+const { Op }        = sequelize;
+
 const guardaCotizaciones                = require("./guardaCotizaciones");
 const ultimas                           = require("./ultimas");
 const axios                             = require('axios');
@@ -22,7 +25,7 @@ module.exports = async (datos) => {
                 ['createdAt', 'DESC'],
             ]
             ,where: {
-              $and: [
+              [Op.and]: [
                 sequelize.where(sequelize.fn('to_char', sequelize.col('"Cotizaciones"."createdAt"'),sequelize.literal(`'YYYY-MM-DD'`)), hoy),
                 { c_monedaOrigemDestino:moneda }
               ]
@@ -81,6 +84,7 @@ module.exports = async (datos) => {
             }
         })
         .catch(function(error) {
+            //console.log(error);
             throw Error(typeof error.response !== "undefined"?error.response.data.error:error);    
 
         });
