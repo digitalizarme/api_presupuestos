@@ -5,7 +5,7 @@ module.exports = (error) => {
         //console.log(error.errors[0].message);
         switch (error.errors[0].message) {
             case `c_identificacion must be unique`:
-                erroPadrao = 'Yá existe este nuemro de identificación en el sistema';
+                erroPadrao = 'Yá existe este numero de identificación en el sistema';
                 break;
 
             case `c_email must be unique`:
