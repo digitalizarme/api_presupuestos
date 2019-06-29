@@ -2,7 +2,7 @@ const { sequelize } = require('../../models');
 /**
  * update generic
  * */
-module.exports = (presupuestoID) => {
+module.exports = async(presupuestoID) => {
 
   const SQL = `
             SELECT
@@ -68,5 +68,5 @@ module.exports = (presupuestoID) => {
               id DESC;
 
   `;
-  return sequelize.query(SQL, { type: sequelize.QueryTypes.SELECT });
+  return await sequelize.query(SQL, { type: sequelize.QueryTypes.SELECT });
 };
