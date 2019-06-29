@@ -31,7 +31,7 @@ module.exports = (query, tabla) => {
                     .indexOf(".") !== -1
                     ? ""
                     : tabla + ".";
-                if (columna.dataField === "updatedAt") {
+                if (columna.dataField === "updatedAt" || columna.dataField === "createdAt" || columna.dataField.indexOf('d_') !== -1) {
                     const fecha = searchText.split("/");
                     if (fecha.length === 3) {
                         const date = new Date(`${searchText}`);
@@ -41,12 +41,18 @@ module.exports = (query, tabla) => {
                                 [Op.eq]: searchText
                             }));
                         }
-                    } else {
-                    condicion.push(sequelize.where(sequelize.fn("UPPER", sequelize.col(tablaComplementar + columna.dataField)), {
-                        [Op.like]: `%${searchText.toUpperCase()}%`
-                    }));
-                }
+                } 
+                else if (columna.dataField.indexOf('n_') === -1) {
+                  condicion.push(sequelize.where(sequelize.fn("UPPER", sequelize.col(tablaComplementar + columna.dataField)), {
+                      [Op.like]: `%${searchText.toUpperCase()}%`
+                  }));
+              }
+              else if (columna.dataField.indexOf('n_') !== -1 && !isNaN(searchText) ) {
+                condicion.push(sequelize.where(sequelize.col(tablaComplementar + columna.dataField), {
+                    [Op.eq]: `${searchText}`
+                }));
             }
+      }
         }
     }
     const tablaComplementar = sortField && sortField.indexOf(".") !== -1

@@ -39,7 +39,29 @@ module.exports = async(query, tipo) => {
         }
 
     }
-    console.log(busca, 'busca');
+    if (typeof total.where === "undefined") {
+        total = {
+            ...total,
+            where: {
+                n_id_status: {
+                    [operador]: opValor
+                }
+            }
+        }
+    }
+    else
+    {
+        total = {
+            ...total,
+            where: {
+                ...total.where
+                ,n_id_status: {
+                    [operador]: opValor
+                }
+            }
+        }
+
+    }
 
     const include = [
         {
