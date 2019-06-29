@@ -10,10 +10,17 @@ const {
 const {traduceErrores} = require("../utils/");
 
 module.exports = (app, router) => {
-    router
-        .get("/presupuestos", async function (context) {
-            context.body = await traeTodosPresupuestos(context.query);
-        });
+    router.get("/presupuestos/pendientes", async function (context) {
+        context.body = await traeTodosPresupuestos(context.query,1);
+    });
+
+    router.get("/presupuestos/aprobados", async function (context) {
+        context.body = await traeTodosPresupuestos(context.query,2);
+    });
+
+    router.get("/presupuestos/concluidos", async function (context) {
+        context.body = await traeTodosPresupuestos(context.query,3);
+    });
 
     router.get("/presupuestos/itemsMercaderiasServicios/:idPresupuesto", async function (context) {
         const idPresupuesto = context.params.idPresupuesto;
@@ -81,9 +88,7 @@ module.exports = (app, router) => {
     router.get("/presupuestos/cuotas/:n_id_presupuesto", async function (context) {
         const n_id_presupuesto = context.params.n_id_presupuesto;
         try {
-            context.body = await Pagos.findAll({
-                order: ['n_nr_cuota']
-                ,where: {
+            context.body = await Pagos.findAll({order: ['n_nr_cuota'], where: {
                     n_id_presupuesto
                 }});
 
