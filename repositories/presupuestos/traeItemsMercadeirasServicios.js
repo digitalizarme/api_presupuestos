@@ -65,7 +65,7 @@ module.exports = (presupuestoID) => {
                 AND p.id = ${presupuestoID}
             ) AS AUX
             ORDER BY
-              id DESC
+              id DESC;
 
   `;
   return sequelize.query(SQL, { type: sequelize.QueryTypes.SELECT });

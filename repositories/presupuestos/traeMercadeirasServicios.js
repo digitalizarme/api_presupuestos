@@ -87,7 +87,7 @@ module.exports = () => {
                 public."Servicios" s
                 ,public."Monedas" mo
               WHERE
-                s.n_id_moneda = mo.id
+                s.n_id_moneda = mo.id;
 
   `;
   return sequelize.query(SQL, { type: sequelize.QueryTypes.SELECT });
