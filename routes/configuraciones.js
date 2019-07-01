@@ -1,14 +1,16 @@
 const { Configuraciones }   = require("../models");
-const { traduceErrores } = require('../utils/');
+const { traduceErrores,checkAccess } = require('../utils/');
 
 module.exports = (app, router) => {
 
     router.get('/configuraciones', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         context.body = await Configuraciones.findOne({where:{id:1}})        
 
     });  
       
     router.put('/configuraciones', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         const datos = context.request.body;
         try
         {

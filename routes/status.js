@@ -1,20 +1,23 @@
 const { Status }   = require("../models");
-const { traduceErrores } = require('../utils/');
+const { traduceErrores,checkAccess } = require('../utils/');
 
 module.exports = (app, router) => {
 
     router.get('/status', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         context.body = await Status.findAll();
 
     });  
 
     router.get('/status/:id', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         const id = context.params.id;
         context.body = await Status.findOne({where:{id}})        
 
     });  
 
     router.post('/status', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         const datos = context.request.body;
         try
         {
@@ -27,6 +30,7 @@ module.exports = (app, router) => {
     });  
       
     router.put('/status', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         const datos = context.request.body;
         const id = datos.id;
         try
@@ -40,6 +44,7 @@ module.exports = (app, router) => {
     });  
     
     router.delete('/status', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         try{
             const {id} = context.query;
             context.body =  await Status.destroy( { where: { id } });

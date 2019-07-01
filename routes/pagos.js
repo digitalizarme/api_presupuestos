@@ -1,22 +1,25 @@
 const { Pagos }   = require("../models");
 const { whereSequelize, objetoTabla }     = require('../utils/');
-const { traduceErrores } = require('../utils/');
+const { traduceErrores,checkAccess } = require('../utils/');
 
 module.exports = (app, router) => {
 
     router.get('/pagos', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         const {busca, total} = whereSequelize(context.query);
         context.body = objetoTabla(await Pagos.findAll(busca),await Pagos.findAll(total))
 
     });  
 
     router.get('/pagos/:id', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         const id = context.params.id;
         context.body = await Pagos.findOne({where:{id}})        
 
     });  
 
     router.post('/pagos', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         const datos = context.request.body;
         try
         {
@@ -29,6 +32,7 @@ module.exports = (app, router) => {
     });  
       
     router.put('/pagos', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         const datos = context.request.body;
         const id = datos.id;
         try
@@ -42,6 +46,7 @@ module.exports = (app, router) => {
     });  
     
     router.delete('/pagos', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         try{
             const {id} = context.query;
             context.body =  await Pagos.destroy( { where: { id } });

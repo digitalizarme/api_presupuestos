@@ -1,22 +1,25 @@
 const { Usuarios }   = require("../models");
 const { getAllUsers } = require('../repositories/usuarios');
 const { encrypt } = require('../utils/');
-const { traduceErrores } = require('../utils/');
+const { traduceErrores,checkAccess } = require('../utils/');
 
 module.exports = (app, router) => {
 
     router.get('/usuarios', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         context.body = await getAllUsers(context.query)
 
     });  
 
     router.get('/usuarios/:id', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         const id = context.params.id;
         context.body = await Usuarios.findOne({where:{id}})        
 
     });  
 
     router.post('/usuarios', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         let datos = context.request.body;
         if(datos.c_contrasena)
         {
@@ -38,6 +41,7 @@ module.exports = (app, router) => {
     });  
 
     router.put('/usuarios', async function(context) { 
+        await checkAccess(context.headers.authorization, 'b_administrador');
         let datos = context.request.body;
         const id = datos.id;
         if(id == 1)
@@ -64,6 +68,7 @@ module.exports = (app, router) => {
     });    
 
     router.delete('/usuarios', async function(context) {  
+        await checkAccess(context.headers.authorization, 'b_administrador');
         const {id} = context.query;
         if(id == 1)
         {

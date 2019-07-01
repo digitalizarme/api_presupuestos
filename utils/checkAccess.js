@@ -1,14 +1,15 @@
-//const { getUserByToken } = require('../repositories/user');
+const { getUserByToken } = require('../repositories/usuarios');
 
-module.exports = async function checkAccess(token, allowedTypes) {
-  const user = null;//await getUserByToken(token);
-  const isAllowed = user && allowedTypes.includes(user.type);
+module.exports = async (token, campo) => {
+  const user = await getUserByToken(token);
+  const isAllowed = user && user[campo]===true;
 
   if (!isAllowed) {
     const error = {
       status  : 403,
-      message : 'Você não está autorizado a utilizar este método.',
+      message : 'No tienes permisos para acceder a esta pagina.',
     };
     throw error;
   }
+  return true;
 };

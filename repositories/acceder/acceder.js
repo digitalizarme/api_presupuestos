@@ -27,9 +27,6 @@ module.exports = async (data) => {
       });
 
   } 
-  // else if (_.get(data, 'socialToken')) {
-  //   user = await findUserBySocialtoken(data.socialToken);
-  // } 
   else {
     throw {
       status    : 500, 
@@ -55,9 +52,12 @@ module.exports = async (data) => {
     username: user.email,
     id: user.id,
   });
-
+  let usuario = user.dataValues;
+  delete usuario.c_contrasena;
+  delete usuario.createdAt;
+  delete usuario.updatedAt;
   return {
-    ...user.dataValues,
+    ...usuario,
     token,
   };
 };
