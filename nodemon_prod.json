@@ -9,8 +9,7 @@
       "js": "node --harmony"
     },
     "env": {
-      "NODE_ENV": "production",
-      "DEBUG": "*,-nodemon:*,-nodemon,-knex:pool"
+      "NODE_ENV": "production"
     },
     "ext": "js json"
   }
