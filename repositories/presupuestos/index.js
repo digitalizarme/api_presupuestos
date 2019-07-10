@@ -6,4 +6,6 @@ module.exports = {
   traeTotalesPresupuesto:require('./traeTotalesPresupuesto'),
   generaCuotas: require('./generaCuotas'),
   atualizaCuotas: require('./atualizaCuotas'),
+  traeCuotas: require('./traeCuotas'),
+  traePresupuestoCuotas:require('./traePresupuestoCuotas'),
 }

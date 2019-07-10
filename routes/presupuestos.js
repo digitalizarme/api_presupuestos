@@ -5,21 +5,24 @@ const {
     traeItemsMercadeirasServicios,
     traeMercadeirasServicios,
     generaCuotas,
-    atualizaCuotas
+    atualizaCuotas,
+    traeCuotas,
+    traePresupuestoCuotas,
 } = require("../repositories/presupuestos");
 const {traduceErrores} = require("../utils/");
 
 module.exports = (app, router) => {
-    router.get("/presupuestos/pendientes", async function (context) {
-        context.body = await traeTodosPresupuestos(context.query,1);
-    });
+    router
+        .get("/presupuestos/pendientes", async function (context) {
+            context.body = await traeTodosPresupuestos(context.query, 1);
+        });
 
     router.get("/presupuestos/aprobados", async function (context) {
-        context.body = await traeTodosPresupuestos(context.query,2);
+        context.body = await traeTodosPresupuestos(context.query, 2);
     });
 
     router.get("/presupuestos/concluidos", async function (context) {
-        context.body = await traeTodosPresupuestos(context.query,3);
+        context.body = await traeTodosPresupuestos(context.query, 3);
     });
 
     router.get("/presupuestos/itemsMercaderiasServicios/:idPresupuesto", async function (context) {
@@ -88,9 +91,7 @@ module.exports = (app, router) => {
     router.get("/presupuestos/cuotas/:n_id_presupuesto", async function (context) {
         const n_id_presupuesto = context.params.n_id_presupuesto;
         try {
-            context.body = await Pagos.findAll({order: ['n_nr_cuota'], where: {
-                    n_id_presupuesto
-                }});
+            context.body = await traeCuotas(n_id_presupuesto);
 
         } catch (error) {
             throw Error(traduceErrores(error));
