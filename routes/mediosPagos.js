@@ -10,16 +10,11 @@ module.exports = (app, router) => {
 
     });  
 
-    router.get('/mediosPagos/:id', async function(context) {  
-        const id = context.params.id;
-        context.body = await MediosPagos.findOne({where:{id}});      
-
-    });  
-
     router.get('/mediosPagos/todos', async function(context) {  
         context.body = await MediosPagos.findAll();        
 
     });  
+
 
     router.post('/mediosPagos', async function(context) {  
         const datos = context.request.body;
@@ -55,5 +50,12 @@ module.exports = (app, router) => {
             throw Error(traduceErrores(error))
         };
     });    
+
+    router.get('/mediosPagos/:id', async function(context) {  
+        const id = context.params.id;
+        context.body = await MediosPagos.findOne({where:{id}});      
+
+    });  
+
 
 };

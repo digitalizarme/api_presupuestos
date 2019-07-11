@@ -1,4 +1,6 @@
-const {Presupuestos, ItemsMercaderias, ItemsServicios, Pagos} = require("../models");
+const {Presupuestos, ItemsMercaderias, ItemsServicios, Pagos, Personas} = require("../models");
+const sequelize = require('sequelize');
+const {Op} = sequelize;
 const {
     traeTodosPresupuestos,
     traePresupuesto,
@@ -7,13 +9,13 @@ const {
     generaCuotas,
     atualizaCuotas,
     traeCuotas,
-    traePresupuestoCuotas,
+    traePresupuestoCuotas
 } = require("../repositories/presupuestos");
 const {traduceErrores} = require("../utils/");
 
 module.exports = (app, router) => {
-    router
-        .get("/presupuestos/pendientes", async function (context) {
+    
+    router.get("/presupuestos/pendientes", async function (context) {
             context.body = await traeTodosPresupuestos(context.query, 1);
         });
 
@@ -25,6 +27,25 @@ module.exports = (app, router) => {
         context.body = await traeTodosPresupuestos(context.query, 3);
     });
 
+    router.get("/presupuestos/cobradores", async function (context) {
+        context.body = await Personas.findAll({
+            where: {
+                [Op.and]: [
+                    {
+                        b_activo: true
+                    }, 
+                ],
+                [Op.or]: [
+                    {
+                        b_funcionario: true
+                    }, {
+                        b_usuario: true
+                    }
+                ]
+            }
+        })
+    });
+
     router.get("/presupuestos/itemsMercaderiasServicios/:idPresupuesto", async function (context) {
         const idPresupuesto = context.params.idPresupuesto;
         context.body = await traeItemsMercadeirasServicios(idPresupuesto);
@@ -32,6 +53,16 @@ module.exports = (app, router) => {
 
     router.get("/presupuestos/mercaderiasServicios", async function (context) {
         context.body = await traeMercadeirasServicios();
+    });
+
+    router.get("/presupuestos/cuotas/:n_id_presupuesto", async function (context) {
+        const n_id_presupuesto = context.params.n_id_presupuesto;
+        try {
+            context.body = await traeCuotas(n_id_presupuesto);
+
+        } catch (error) {
+            throw Error(traduceErrores(error));
+        }
     });
 
     router.get("/presupuestos/:id", async function (context) {
@@ -88,15 +119,6 @@ module.exports = (app, router) => {
         }
     });
 
-    router.get("/presupuestos/cuotas/:n_id_presupuesto", async function (context) {
-        const n_id_presupuesto = context.params.n_id_presupuesto;
-        try {
-            context.body = await traeCuotas(n_id_presupuesto);
-
-        } catch (error) {
-            throw Error(traduceErrores(error));
-        }
-    });
 
     router.post("/presupuestos/cuotas", async function (context) {
         const datos = context.request.body;

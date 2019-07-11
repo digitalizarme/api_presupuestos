@@ -36,7 +36,8 @@ module.exports = (app, router) => {
         };
 
 
-    });    
+    });  
+      
     router.put('/cotizaciones', async function(context) {  
         await checkAccess(context.headers.authorization, 'b_administrador');
         const datos = context.request.body;
