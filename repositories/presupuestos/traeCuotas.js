@@ -1,5 +1,5 @@
 const {Pagos,Monedas} = require("../../models");
-module.exports = async(n_id_presupuesto) => {
+module.exports = async(n_id_presupuesto,) => {
 
     const include = 
     [

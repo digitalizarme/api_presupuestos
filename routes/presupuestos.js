@@ -9,12 +9,11 @@ const {
     generaCuotas,
     atualizaCuotas,
     traeCuotas,
-    traePresupuestoCuotas
 } = require("../repositories/presupuestos");
 const {traduceErrores} = require("../utils/");
 
 module.exports = (app, router) => {
-    
+
     router.get("/presupuestos/pendientes", async function (context) {
             context.body = await traeTodosPresupuestos(context.query, 1);
         });
@@ -56,6 +55,16 @@ module.exports = (app, router) => {
     });
 
     router.get("/presupuestos/cuotas/:n_id_presupuesto", async function (context) {
+        const n_id_presupuesto = context.params.n_id_presupuesto;
+        try {
+            context.body = await traeCuotas(n_id_presupuesto);
+
+        } catch (error) {
+            throw Error(traduceErrores(error));
+        }
+    });
+
+    router.get("/presupuestos/cuotas2/:n_id_presupuesto", async function (context) {
         const n_id_presupuesto = context.params.n_id_presupuesto;
         try {
             context.body = await traeCuotas(n_id_presupuesto);
@@ -125,6 +134,18 @@ module.exports = (app, router) => {
         try {
 
             context.body = await generaCuotas(datos);
+        } catch (error) {
+            throw Error(traduceErrores(error));
+        }
+    });
+
+    router.put("/presupuestos/cuota/:id", async function (context) {
+        const datos = context.request.body;
+        const id = context.params.id;
+
+        try {
+            context.body = await Pagos.update( datos , { where: { id } })
+
         } catch (error) {
             throw Error(traduceErrores(error));
         }

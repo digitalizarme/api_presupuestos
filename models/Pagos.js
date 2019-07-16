@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     n_nr_cuota            : DataTypes.INTEGER,
     n_valor               : DataTypes.FLOAT,
     n_desc_redondeo       : DataTypes.FLOAT,
-    d_fecha_pago          : DataTypes.DATE,
+    d_fecha_pago          : DataTypes.DATEONLY,
     d_fecha_vcto          : DataTypes.DATEONLY,
   }, {
     tableName: 'Pagos',
