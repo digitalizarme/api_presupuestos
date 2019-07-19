@@ -4,16 +4,13 @@ const {Op} = sequelize;
 
 const {whereSequelize, objetoTabla} = require('../../utils');
 module.exports = async(query, tipo) => {
-    let operador = Op.ne;
-    let opValor = 3;
-    if(tipo===2)
+    let operador = Op.lte;
+    let opValor = 2;
+    if(tipo!==1)
     {
         operador = Op.eq;
-    }
-    else if(tipo===3)
-    {
-        operador = Op.eq;
-        opValor = 4;
+        opValor = tipo;
+
     }
     let {busca, total} = whereSequelize(query, 'Presupuestos');
     if (typeof busca.where === "undefined") {

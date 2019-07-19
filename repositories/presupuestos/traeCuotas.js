@@ -1,5 +1,5 @@
 const {Pagos,Monedas} = require("../../models");
-module.exports = async(n_id_presupuesto,) => {
+module.exports = async(n_id_presupuesto,tipo) => {
 
     const include = 
     [
@@ -9,11 +9,16 @@ module.exports = async(n_id_presupuesto,) => {
         },
     ];
 
+    let order = ['n_nr_cuota'];
+    if(tipo===1)
+    {
+        order = [['d_fecha_pago','desc'],['n_nr_cuota']];
+    }
 
 
     return await Pagos.findAll(
         {
-            order: ['n_nr_cuota'], 
+            order, 
             include,
             where: {
                 n_id_presupuesto

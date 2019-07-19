@@ -9,7 +9,7 @@ module.exports = async(datos, metodo) => {
             }
         });
         for (let index = 0; index < datos.length; index++) {
-            const pago = {
+            let pago = {
                 n_valor: datos[index].n_valor,
                 d_fecha_vcto:datos[index].d_fecha_vcto,
                 n_id_presupuesto: datos[index].n_id_presupuesto,

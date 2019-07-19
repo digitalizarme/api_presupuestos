@@ -8,22 +8,23 @@ const {
     traeMercadeirasServicios,
     generaCuotas,
     atualizaCuotas,
-    traeCuotas,
+    traeCuotas
 } = require("../repositories/presupuestos");
 const {traduceErrores} = require("../utils/");
 
 module.exports = (app, router) => {
 
-    router.get("/presupuestos/pendientes", async function (context) {
+    router
+        .get("/presupuestos/pendientes", async function (context) {
             context.body = await traeTodosPresupuestos(context.query, 1);
         });
 
     router.get("/presupuestos/aprobados", async function (context) {
-        context.body = await traeTodosPresupuestos(context.query, 2);
+        context.body = await traeTodosPresupuestos(context.query, 3);
     });
 
     router.get("/presupuestos/concluidos", async function (context) {
-        context.body = await traeTodosPresupuestos(context.query, 3);
+        context.body = await traeTodosPresupuestos(context.query, 4);
     });
 
     router.get("/presupuestos/cobradores", async function (context) {
@@ -32,7 +33,7 @@ module.exports = (app, router) => {
                 [Op.and]: [
                     {
                         b_activo: true
-                    }, 
+                    }
                 ],
                 [Op.or]: [
                     {
@@ -64,10 +65,10 @@ module.exports = (app, router) => {
         }
     });
 
-    router.get("/presupuestos/cuotas2/:n_id_presupuesto", async function (context) {
+    router.get("/presupuestos/cuotas/:n_id_presupuesto/1", async function (context) {
         const n_id_presupuesto = context.params.n_id_presupuesto;
         try {
-            context.body = await traeCuotas(n_id_presupuesto);
+            context.body = await traeCuotas(n_id_presupuesto, 1);
 
         } catch (error) {
             throw Error(traduceErrores(error));
@@ -79,7 +80,7 @@ module.exports = (app, router) => {
         context.body = await traePresupuesto(id);
     });
 
-    router.delete("/presupuestos", async function (context) {
+    router.delete("/presupuestos/:tipoPresupuesto", async function (context) {
         const {id} = context.query;
         await Pagos.destroy({
             where: {
@@ -128,7 +129,6 @@ module.exports = (app, router) => {
         }
     });
 
-
     router.post("/presupuestos/cuotas", async function (context) {
         const datos = context.request.body;
         try {
@@ -141,10 +141,30 @@ module.exports = (app, router) => {
 
     router.put("/presupuestos/cuota/:id", async function (context) {
         const datos = context.request.body;
+        const n_id_presupuesto = datos.n_id_presupuesto;
         const id = context.params.id;
 
         try {
-            context.body = await Pagos.update( datos , { where: { id } })
+            const resPagos = await Pagos.update(datos, {where: {
+                    id
+                }});
+            const todosPagos = await Pagos.findAll({
+                where: {
+                    d_fecha_pago: null,
+                    n_id_presupuesto
+                }
+            });
+            if (todosPagos.length === 0) {
+                const datos = {
+                    n_id_status: 4
+                }
+                await Presupuestos.update(datos, {
+                    where: {
+                        id: n_id_presupuesto
+                    }
+                });
+            }
+            context.body = resPagos;
 
         } catch (error) {
             throw Error(traduceErrores(error));
