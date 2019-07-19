@@ -81,6 +81,11 @@ module.exports = (app, router) => {
     });
 
     router.delete("/presupuestos/:tipoPresupuesto", async function (context) {
+        const tipoPresupuesto = context.params.tipoPresupuesto;
+
+        if (tipoPresupuesto === 'concluidos') {
+            throw Error('No se permite eliminar presupuesto ya concluido.');
+        }
         const {id} = context.query;
         await Pagos.destroy({
             where: {
@@ -226,6 +231,9 @@ module.exports = (app, router) => {
 
     router.put("/presupuestos", async function (context) {
         const datos = context.request.body;
+        if (datos.n_id_status === 4) {
+            throw Error('No se permite actualizar presupuesto ya concluido.');
+        }
         const id = datos.id;
         try {
             if (datos.cuotas && datos.cuotas.length > 0) {
