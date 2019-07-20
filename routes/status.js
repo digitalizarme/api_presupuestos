@@ -4,7 +4,6 @@ const { traduceErrores,checkAccess } = require('../utils/');
 module.exports = (app, router) => {
 
     router.get('/status', async function(context) {  
-        await checkAccess(context.headers.authorization, 'b_administrador');
         context.body = await Status.findAll();
 
     });  
