@@ -11,7 +11,7 @@ module.exports = {
       c_tipo: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: false
       },
       n_id_moneda: {
         allowNull: false,

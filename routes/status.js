@@ -9,7 +9,6 @@ module.exports = (app, router) => {
     });  
 
     router.get('/status/:id', async function(context) {  
-        await checkAccess(context.headers.authorization, 'b_administrador');
         const id = context.params.id;
         context.body = await Status.findOne({where:{id}})        
 

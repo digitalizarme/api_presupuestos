@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   const Fletes = sequelize.define('Fletes', {
     c_tipo                       : {
       type   : DataTypes.STRING,
-      unique : true
+      unique : false
     },
     n_id_moneda      : DataTypes.INTEGER,
     n_valor          : DataTypes.FLOAT,

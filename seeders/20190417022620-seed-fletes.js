@@ -5,6 +5,14 @@ module.exports = {
       return queryInterface.bulkInsert('Fletes', [
         {
           c_tipo          : 'KG',
+          n_valor         : 23.00,
+          n_id_moneda     : 2,
+          b_activo        : true,
+          createdAt       : new Date(),
+          updatedAt       : new Date()
+        },
+        {
+          c_tipo          : 'KG',
           n_valor         : 28.00,
           n_id_moneda     : 2,
           b_activo        : true,
