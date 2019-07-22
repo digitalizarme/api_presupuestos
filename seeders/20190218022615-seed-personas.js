@@ -40,6 +40,7 @@ module.exports = {
           b_activo                    : true,
           b_cliente                   : false,
           b_comisionista              : true,
+          n_valor_porcentaje_comision : 70,
           b_funcionario               : false,
           b_usuario                   : false,
           createdAt                   : new Date(),
