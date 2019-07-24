@@ -49,6 +49,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATEONLY
       },
+      t_observacion: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

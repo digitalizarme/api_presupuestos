@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     n_desc_redondeo       : DataTypes.FLOAT,
     d_fecha_pago          : DataTypes.DATEONLY,
     d_fecha_vcto          : DataTypes.DATEONLY,
+    t_observacion         : DataTypes.TEXT,
   }, {
     tableName: 'Pagos',
   });
