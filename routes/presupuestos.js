@@ -8,7 +8,8 @@ const {
     traeMercadeirasServicios,
     generaCuotas,
     atualizaCuotas,
-    traeCuotas
+    traeCuotas,
+    traePresupuestosComision
 } = require("../repositories/presupuestos");
 const {traduceErrores} = require("../utils/");
 
@@ -24,6 +25,10 @@ module.exports = (app, router) => {
     });
 
     router.get("/presupuestos/concluidos", async function (context) {
+        context.body = await traeTodosPresupuestos(context.query, 4);
+    });
+
+    router.get("/presupuestos/comisionista", async function (context) {
         context.body = await traeTodosPresupuestos(context.query, 4);
     });
 
