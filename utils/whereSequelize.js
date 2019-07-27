@@ -55,7 +55,8 @@ module.exports = (query, tabla) => {
       }
         }
     }
-    const tablaComplementar = sortField && sortField.indexOf(".") !== -1
+    const columnaOrder = columnas.find(columna=> columna.dataField ==sortField);
+    const tablaComplementar = (columnaOrder && columnaOrder.noExiste===true) || sortField && sortField.indexOf(".") !== -1
         ? ""
         : `"${tabla}".`;
     let ordenacion = sortField && sortOrder
