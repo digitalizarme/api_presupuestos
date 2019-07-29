@@ -26,7 +26,7 @@ module.exports = (query, tabla) => {
     if (typeof searchText !== "undefined" && searchText !== "") {
         for (const columna of columnas) {
             if (columna.searchable || typeof columna.searchable === "undefined") {
-                const tablaComplementar = columna
+                const tablaComplementar = columna.noExiste || columna
                     .dataField
                     .indexOf(".") !== -1
                     ? ""
@@ -36,27 +36,27 @@ module.exports = (query, tabla) => {
                     if (fecha.length === 3) {
                         const date = new Date(`${searchText}`);
                         const isValidDate = Boolean(+ date);
-                        if (isValidDate) 
+                        if (isValidDate) {
                             condicion.push(sequelize.where(sequelize.fn("to_char", sequelize.col(tablaComplementar + columna.dataField), "DD/MM/YYYY"), {
                                 [Op.eq]: searchText
                             }));
                         }
-                } 
-                else if (columna.dataField.indexOf('n_') === -1) {
-                  condicion.push(sequelize.where(sequelize.fn("UPPER", sequelize.col(tablaComplementar + columna.dataField)), {
-                      [Op.like]: `%${searchText.toUpperCase()}%`
-                  }));
-              }
-              else if (columna.dataField.indexOf('n_') !== -1 && !isNaN(searchText) ) {
-                condicion.push(sequelize.where(sequelize.col(tablaComplementar + columna.dataField), {
-                    [Op.eq]: `${searchText}`
-                }));
+
+                    }
+                } else if (columna.dataField.indexOf('n_') === -1) {
+                    condicion.push(sequelize.where(sequelize.fn("UPPER", sequelize.col(tablaComplementar + columna.dataField)), {
+                        [Op.like]: `%${searchText.toUpperCase()}%`
+                    }));
+                } else if (columna.dataField.indexOf('n_') !== -1 && !isNaN(searchText)) {
+                    condicion.push(sequelize.where(sequelize.col(tablaComplementar + columna.dataField), {
+                        [Op.eq]: `${searchText}`
+                    }));
+                }
             }
-      }
         }
     }
-    const columnaOrder = columnas.find(columna=> columna.dataField ==sortField);
-    const tablaComplementar = (columnaOrder && columnaOrder.noExiste===true) || sortField && sortField.indexOf(".") !== -1
+    const columnaOrder = columnas.find(columna => columna.dataField == sortField);
+    const tablaComplementar = (columnaOrder && columnaOrder.noExiste === true) || sortField && sortField.indexOf(".") !== -1
         ? ""
         : `"${tabla}".`;
     let ordenacion = sortField && sortOrder
