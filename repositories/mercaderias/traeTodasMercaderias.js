@@ -1,66 +1,75 @@
-const { sequelize,Mercaderias, MercaderiasSubGrupos,MercaderiasGrupos,MercaderiasMarcas, Monedas }   = require("../../models");
-const { whereSequelize, objetoTabla }     = require('../../utils');
+const {
+    sequelize,
+    Mercaderias,
+    MercaderiasSubGrupos,
+    MercaderiasGrupos,
+    MercaderiasMarcas,
+    Monedas
+} = require("../../models");
+const {whereSequelize, objetoTabla} = require('../../utils');
 
-module.exports = async (query) => {
-    const {busca, total} = whereSequelize(query,'Mercaderias');
+module.exports = async(query) => {
+
+    const casos = [
+        [
+            sequelize.literal(`CASE WHEN "Mercaderias".b_activo THEN 'SÍ' ELSE 'NO' END`),
+            'c_activo'
+        ]
+    ];
+    query = {
+        ...query,
+        casos
+    }
+
+    const {busca, total} = whereSequelize(query, 'Mercaderias');
 
     const params = {
         ...busca,
-        include: 
-        [
+        include: [
             {
-                model : MercaderiasGrupos,
-                as    : 'grupo',
+                model: MercaderiasGrupos,
+                as: 'grupo',
                 attributes: ['c_descripcion']
-            },
-            {
-                model : MercaderiasSubGrupos,
-                as    : 'subGrupo',
+            }, {
+                model: MercaderiasSubGrupos,
+                as: 'subGrupo',
                 attributes: ['c_descripcion']
-            },
-            {
-                model : MercaderiasMarcas,
-                as    : 'marca',
+            }, {
+                model: MercaderiasMarcas,
+                as: 'marca',
                 attributes: ['c_descripcion']
-            },
-            {
-                model : Monedas,
-                as    : 'moneda',
+            }, {
+                model: Monedas,
+                as: 'moneda',
                 attributes: ['c_descripcion']
             }
         ],
-        attributes: { 
-            include: [
-                [sequelize.literal(`CASE WHEN "Mercaderias".b_activo THEN 'SÍ' ELSE 'NO' END`), 'c_activo']
-            ] 
-        },
+        attributes: {
+            include: casos
+        }
     }
 
     const newTotal = {
         ...total,
-        include: 
-        [
+        include: [
             {
-                model : MercaderiasGrupos,
-                as    : 'grupo',
+                model: MercaderiasGrupos,
+                as: 'grupo',
                 attributes: ['c_descripcion']
-            },
-            {
-                model : MercaderiasSubGrupos,
-                as    : 'subGrupo',
+            }, {
+                model: MercaderiasSubGrupos,
+                as: 'subGrupo',
                 attributes: ['c_descripcion']
-            },
-            {
-                model : MercaderiasMarcas,
-                as    : 'marca',
+            }, {
+                model: MercaderiasMarcas,
+                as: 'marca',
                 attributes: ['c_descripcion']
-            },
-            {
-                model : Monedas,
-                as    : 'moneda',
+            }, {
+                model: Monedas,
+                as: 'moneda',
                 attributes: ['c_descripcion']
             }
-        ],
+        ]
     }
-    return objetoTabla(await Mercaderias.findAll(params),await Mercaderias.findAll(newTotal))
+    return objetoTabla(await Mercaderias.findAll(params), await Mercaderias.findAll(newTotal))
 }

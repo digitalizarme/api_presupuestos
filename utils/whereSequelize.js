@@ -10,7 +10,8 @@ module.exports = (query, tabla) => {
         columns,
         sortField,
         sortOrder,
-        defaultSorted
+        defaultSorted,
+        casos
     } = query;
     const camposOrdenar = typeof defaultSorted !== "undefined"
         ? JSON.parse(defaultSorted)
@@ -26,7 +27,7 @@ module.exports = (query, tabla) => {
     if (typeof searchText !== "undefined" && searchText !== "") {
         for (const columna of columnas) {
             if (columna.searchable || typeof columna.searchable === "undefined") {
-                const tablaComplementar = columna.noExiste || columna
+                const tablaComplementar = columna
                     .dataField
                     .indexOf(".") !== -1
                     ? ""
@@ -44,9 +45,18 @@ module.exports = (query, tabla) => {
 
                     }
                 } else if (columna.dataField.indexOf('n_') === -1) {
-                    condicion.push(sequelize.where(sequelize.fn("UPPER", sequelize.col(tablaComplementar + columna.dataField)), {
-                        [Op.like]: `%${searchText.toUpperCase()}%`
-                    }));
+                    const columnaCase = casos && casos.find(unCase => unCase[1] === columna.dataField);
+                    if(columnaCase){
+                        condicion.push(sequelize.where(columnaCase[0], {
+                            [Op.like]: `%${searchText.toUpperCase()}%`
+                        }));
+                    }
+                    else{
+                        condicion.push(sequelize.where(sequelize.fn("UPPER", sequelize.col(tablaComplementar + columna.dataField)), {
+                            [Op.like]: `%${searchText.toUpperCase()}%`
+                        }));
+    
+                    }
                 } else if (columna.dataField.indexOf('n_') !== -1 && !isNaN(searchText)) {
                     condicion.push(sequelize.where(sequelize.col(tablaComplementar + columna.dataField), {
                         [Op.eq]: `${searchText}`
@@ -55,8 +65,8 @@ module.exports = (query, tabla) => {
             }
         }
     }
-    const columnaOrder = columnas.find(columna => columna.dataField == sortField);
-    const tablaComplementar = (columnaOrder && columnaOrder.noExiste === true) || sortField && sortField.indexOf(".") !== -1
+    const columnaOrder = casos && casos.find(unCase => unCase[1] === sortField);
+    const tablaComplementar = columnaOrder || sortField && sortField.indexOf(".") !== -1
         ? ""
         : `"${tabla}".`;
     let ordenacion = sortField && sortOrder

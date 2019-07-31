@@ -1,4 +1,4 @@
-const {MercaderiasSubGrupos} = require("../models");
+const {MercaderiasSubGrupos, sequelize} = require("../models");
 const {traduceErrores} = require('../utils/');
 const {traeTodosSubGrupos} = require('../repositories/mercaderiasSubGrupos');
 

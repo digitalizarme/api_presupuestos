@@ -1,7 +1,6 @@
 const { Cotizaciones }     = require("../models");
-const { enlinea }                   = require("../repositories/cotizaciones");
+const { enlinea, traeTodasCotizaciones }                   = require("../repositories/cotizaciones");
 const { traduceErrores,checkAccess } = require('../utils/');
-const { whereSequelize, objetoTabla }     = require('../utils/');
 
 module.exports = (app, router) => {
 
@@ -11,8 +10,7 @@ module.exports = (app, router) => {
 
     router.get('/cotizaciones', async function(context) {  
         await checkAccess(context.headers.authorization, 'b_administrador');
-        const {busca, total} = whereSequelize(context.query);
-        context.body = objetoTabla(await Cotizaciones.findAll(busca),await Cotizaciones.findAll(total))
+        context.body = await traeTodasCotizaciones(context);
 
     });  
 

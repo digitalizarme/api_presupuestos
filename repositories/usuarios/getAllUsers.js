@@ -3,6 +3,39 @@ const whereSequelize = require('../../utils/whereSequelize');
 const objetoTabla = require('../../utils/objetoTabla');
 
 module.exports = async(query) => {
+
+    const casos = [
+        [
+            sequelize.literal(`CASE WHEN "Usuarios".b_activo THEN 'SÍ' ELSE 'NO' END`),
+            `c_activo`
+        ],
+        [
+            sequelize.literal(`CASE WHEN b_administrador THEN 'SÍ' ELSE 'NO' END`),
+            `c_administrador`
+        ],
+        [
+            sequelize.literal(`CASE WHEN b_cadastrar THEN 'SÍ' ELSE 'NO' END`),
+            `c_cadastrar`
+        ],
+        [
+            sequelize.literal(`CASE WHEN b_editar THEN 'SÍ' ELSE 'NO' END`),
+            `c_editar`
+        ],
+        [
+            sequelize.literal(`CASE WHEN b_eliminar THEN 'SÍ' ELSE 'NO' END`),
+            `c_eliminar`
+        ],
+        [
+            sequelize.literal(`CASE WHEN b_imprimir THEN 'SÍ' ELSE 'NO' END`),
+            `c_imprimir`
+        ]
+    ];
+
+    query = {
+        ...query,
+        casos
+    }
+
     const {busca, total} = whereSequelize(query, 'Usuarios');
     const params = {
         ...busca,
@@ -11,32 +44,7 @@ module.exports = async(query) => {
             as: 'persona'
         },
         attributes: {
-            include: [
-                [
-                    sequelize.literal(`CASE WHEN "Usuarios".b_activo THEN 'SÍ' ELSE 'NO' END`),
-                    `c_activo`
-                ],
-                [
-                    sequelize.literal(`CASE WHEN b_administrador THEN 'SÍ' ELSE 'NO' END`),
-                    `c_administrador`
-                ],
-                [
-                    sequelize.literal(`CASE WHEN b_cadastrar THEN 'SÍ' ELSE 'NO' END`),
-                    `c_cadastrar`
-                ],
-                [
-                    sequelize.literal(`CASE WHEN b_editar THEN 'SÍ' ELSE 'NO' END`),
-                    `c_editar`
-                ],
-                [
-                    sequelize.literal(`CASE WHEN b_eliminar THEN 'SÍ' ELSE 'NO' END`),
-                    `c_eliminar`
-                ],
-                [
-                    sequelize.literal(`CASE WHEN b_imprimir THEN 'SÍ' ELSE 'NO' END`),
-                    `c_imprimir`
-                ]
-            ]
+            include: casos
         }
     }
     const newTotal = {
