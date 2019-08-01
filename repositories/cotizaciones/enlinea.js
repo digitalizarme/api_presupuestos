@@ -118,6 +118,10 @@ module.exports = async(datos) => {
                     } else if (typeof error.response !== "undefined" && typeof error.response.data !== "undefined") {
                         msg = error.response.data;
                     }
+                    if(msg.indexOf("503 Service Unavailable") !== -1)
+                    {
+                        msg = "El proveedor de cotizaciones free.currconv.com no esta disponible. Favor cadastrar manualmente las cotizaciones"
+                    }
                     //console.log(msg,'error cotizacion');
                     throw Error(msg);
                 } else {
