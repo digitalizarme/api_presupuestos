@@ -103,7 +103,7 @@ module.exports = (app, router) => {
                 }
             })
         } catch (error) {
-            console.log(error)
+            //console.log(error)
             throw Error(traduceErrores(error))
         };
     });

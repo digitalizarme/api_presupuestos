@@ -64,6 +64,20 @@ module.exports = (error) => {
         }
 
     }
+    else if(typeof error.name !== "undefined" && error.name === 'SequelizeDatabaseError')
+    {
+        //console.log(error.original,'aqui')
+        switch (error.original.code) {
+            case `23502`:
+                erroPadrao = 'Un campo obligatorio esta vazio';
+                break;
+
+            default:
+                "Error en la base de datos"
+                break;
+        }
+        
+    }
     const erroBanco = error.original && error.original.sqlMessage
         ? error.original.sqlMessage
         : typeof error.name !== "undefined" && error.name === 'SequelizeForeignKeyConstraintError'
