@@ -253,4 +253,16 @@ module.exports = (app, router) => {
         }
     });
 
+    router.put("/presupuestos/status", async function (context) {
+        let datos = context.request.body;
+        const id = datos.id;
+        datos = {
+            n_id_status: datos.n_id_status
+        }
+        context.body = await Presupuestos.update(datos, {where: {
+                id
+            }});
+
+    });
+
 };
