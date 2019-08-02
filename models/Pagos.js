@@ -12,7 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     d_fecha_pago          : DataTypes.DATEONLY,
     d_fecha_vcto          : DataTypes.DATEONLY,
     t_observacion         : DataTypes.TEXT,
-  }, {
+    n_recebido: {
+      type: new DataTypes.VIRTUAL(DataTypes.FLOAT, ['n_valor','n_desc_redondeo']),
+      get: function() {
+        return this.get('n_valor') + this.get('n_desc_redondeo')
+      }
+    }  }, {
     tableName: 'Pagos',
   });
 
