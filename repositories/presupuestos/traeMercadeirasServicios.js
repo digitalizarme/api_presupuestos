@@ -5,6 +5,7 @@ const { sequelize } = require('../../models');
 module.exports = async() => {
 
   const SQL = `
+  SELECT * FROM (
                 SELECT
                 m.id
                 ,m.c_descripcion
@@ -87,7 +88,12 @@ module.exports = async() => {
                 public."Servicios" s
                 ,public."Monedas" mo
               WHERE
-                s.n_id_moneda = mo.id;
+                s.n_id_moneda = mo.id
+) AS AUX
+ORDER BY
+c_descripcion  
+
+;
 
   `;
   return await sequelize.query(SQL, { type: sequelize.QueryTypes.SELECT });
