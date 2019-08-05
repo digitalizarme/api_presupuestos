@@ -21,7 +21,7 @@ module.exports = (app, router) => {
         {
             if(isNaN(datos.n_id_grupo))
             {
-                await ServiciosGrupos.create({c_descripcion:datos.n_id_grupo}).then(model => (datos.n_id_grupo = model.id))
+                await ServiciosGrupos.create({c_descripcion:datos.n_id_grupo, b_activo: true}).then(model => (datos.n_id_grupo = model.id))
             }
             await Servicios.create(datos).then(model => context.body = model);
             
@@ -38,7 +38,7 @@ module.exports = (app, router) => {
         {
             if(isNaN(datos.n_id_grupo))
             {
-                await ServiciosGrupos.create({c_descripcion:datos.n_id_grupo}).then(model => (datos.n_id_grupo = model.id))
+                await ServiciosGrupos.create({c_descripcion:datos.n_id_grupo, b_activo: true}).then(model => (datos.n_id_grupo = model.id))
             }
             await Servicios.update( datos , { where: { id } });
             context.body = datos;

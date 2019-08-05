@@ -9,7 +9,7 @@ module.exports = (app, router) => {
     });  
 
     router.get('/personas/todas', async function(context) {  
-        context.body = await Personas.findAll();
+        context.body = await Personas.findAll({order:['c_nombre']});
     });  
 
     router.get('/personas/:id', async function(context) {  
