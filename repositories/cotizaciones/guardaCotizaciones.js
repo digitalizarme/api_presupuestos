@@ -7,7 +7,7 @@ module.exports = async (monedas) => {
         //console.log(monedas[moneda],'antes');
         dados = {
             c_monedaOrigemDestino: moneda
-            ,n_valor: monedas[moneda]*1.3
+            ,n_valor: monedas[moneda]*1.03
         };
         //console.log(dados.n_valor,'depois');
         await Cotizaciones.create(dados);
