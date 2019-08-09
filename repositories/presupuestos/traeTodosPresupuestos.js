@@ -41,43 +41,56 @@ module.exports = async(query, tipo) => {
             sequelize.literal('(SELECT round(cast(SUM(n_total) as numeric),2) n_total FROM ( SELECT (  COALESCE' +
                     '(SUM("ItemsMercaderias".n_exentas),0) ) n_total FROM public."ItemsMercaderias" A' +
                     'S "ItemsMercaderias" WHERE "ItemsMercaderias".n_id_presupuesto = "Presupuestos".' +
-                    'id ) aux)'),
+                    'id UNION ALL SELECT  COALESCE(SUM(ItemsServicios.n_exentas) ,0) FROM public."Ite' +
+                    'msServicios" AS ItemsServicios WHERE ItemsServicios.n_id_presupuesto = "Presupue' +
+                    'stos".id) aux)'),
             'n_total_exentas'
+        ],
+        [
+            sequelize.literal('(SELECT round(cast(SUM(n_total) as numeric),2) n_total FROM ( SELECT (  COALESCE' +
+                    '(SUM("ItemsMercaderias".n_gravadas_5),0) ) n_total FROM public."ItemsMercaderias' +
+                    '" AS "ItemsMercaderias" WHERE "ItemsMercaderias".n_id_presupuesto = "Presupuesto' +
+                    's".id UNION ALL SELECT  COALESCE(SUM(ItemsServicios.n_gravadas_5) ,0) FROM publi' +
+                    'c."ItemsServicios" AS ItemsServicios WHERE ItemsServicios.n_id_presupuesto = "Pr' +
+                    'esupuestos".id ) aux)'),
+            'n_total_5'
         ],
         [
             sequelize.literal('(SELECT round(cast(SUM(n_total) as numeric),2) n_total FROM ( SELECT (  COALESCE' +
                     '(SUM("ItemsMercaderias".n_gravadas_10),0) ) n_total FROM public."ItemsMercaderia' +
                     's" AS "ItemsMercaderias" WHERE "ItemsMercaderias".n_id_presupuesto = "Presupuest' +
-                    'os".id ) aux)'),
+                    'os".id UNION ALL SELECT  COALESCE(SUM(ItemsServicios.n_gravadas_10) ,0) FROM pub' +
+                    'lic."ItemsServicios" AS ItemsServicios WHERE ItemsServicios.n_id_presupuesto = "' +
+                    'Presupuestos".id ) aux)'),
             'n_total_10'
         ],
         [
             sequelize.literal('(SELECT round(cast(SUM(n_total) as numeric),2) n_total FROM ( SELECT (  COALESCE' +
                     '((SUM("ItemsMercaderias".n_gravadas_10)/11),0) ) n_total FROM public."ItemsMerca' +
                     'derias" AS "ItemsMercaderias" WHERE "ItemsMercaderias".n_id_presupuesto = "Presu' +
-                    'puestos".id ) aux)'),
+                    'puestos".id UNION ALL SELECT  COALESCE((SUM(ItemsServicios.n_gravadas_10)/11) ,0' +
+                    ') FROM public."ItemsServicios" AS ItemsServicios WHERE ItemsServicios.n_id_presu' +
+                    'puesto = "Presupuestos".id ) aux)'),
             'n_total_iva_10'
         ],
         [
             sequelize.literal('(SELECT round(cast(SUM(n_total) as numeric),2) n_total FROM ( SELECT (  COALESCE' +
                     '((SUM("ItemsMercaderias".n_gravadas_5)/21),0) ) n_total FROM public."ItemsMercad' +
                     'erias" AS "ItemsMercaderias" WHERE "ItemsMercaderias".n_id_presupuesto = "Presup' +
-                    'uestos".id ) aux)'),
+                    'uestos".id UNION ALL SELECT  COALESCE((SUM(ItemsServicios.n_gravadas_5)/21) ,0) ' +
+                    'FROM public."ItemsServicios" AS ItemsServicios WHERE ItemsServicios.n_id_presupu' +
+                    'esto = "Presupuestos".id ) aux)'),
             'n_total_iva_5'
         ],
         [
             sequelize.literal('(SELECT round(cast(SUM(n_total) as numeric),2) n_total FROM ( SELECT (  COALESCE' +
                     '((SUM("ItemsMercaderias".n_gravadas_10)/11),0) + COALESCE((SUM("ItemsMercaderias' +
                     '".n_gravadas_5)/21),0) ) n_total FROM public."ItemsMercaderias" AS "ItemsMercade' +
-                    'rias" WHERE "ItemsMercaderias".n_id_presupuesto = "Presupuestos".id ) aux)'),
+                    'rias" WHERE "ItemsMercaderias".n_id_presupuesto = "Presupuestos".id UNION ALL SE' +
+                    'LECT  COALESCE((SUM(ItemsServicios.n_gravadas_5)/21) ,0) + COALESCE((SUM(ItemsSe' +
+                    'rvicios.n_gravadas_10)/11) ,0) FROM public."ItemsServicios" AS ItemsServicios WH' +
+                    'ERE ItemsServicios.n_id_presupuesto = "Presupuestos".id ) aux)'),
             'n_total_iva'
-        ],
-        [
-            sequelize.literal('(SELECT round(cast(SUM(n_total) as numeric),2) n_total FROM ( SELECT (  COALESCE' +
-                    '(SUM("ItemsMercaderias".n_gravadas_5),0) ) n_total FROM public."ItemsMercaderias' +
-                    '" AS "ItemsMercaderias" WHERE "ItemsMercaderias".n_id_presupuesto = "Presupuesto' +
-                    's".id ) aux)'),
-            'n_total_5'
         ],
         [
             sequelize.literal('(SELECT round(cast(SUM(n_total) as numeric),2) n_total FROM ( SELECT (  COALESCE' +
