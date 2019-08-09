@@ -27,10 +27,11 @@ module.exports = async(datos) => {
         .monedas
         .slice(0, 3);
     let arrayCotizaciones = [];
+    let dadosCotizacion = {};
     for await(let moneda of monedas) {
-        let dadosCotizacion = await Cotizaciones.findOne({
+        dadosCotizacion = await Cotizaciones.findOne({
             attributes: [
-                'c_monedaOrigemDestino', 'n_valor'
+                'c_monedaOrigemDestino', 'n_valor','createdAt'
             ],
             order: [
                 ['createdAt', 'DESC']
@@ -44,13 +45,11 @@ module.exports = async(datos) => {
             },
             raw: true
         });
-
         if (dadosCotizacion) {
             arrayCotizaciones.push(dadosCotizacion);
         }
 
     }
-
     if (arrayCotizaciones.length !== monedas.length) {
         let monedasBuscarCotizacion = datos.monedas;
         if (monedas.length !== totalMonedas) {
@@ -67,6 +66,7 @@ module.exports = async(datos) => {
             monedasBuscarCotizacion = arrayMonedas.join();
 
         }
+
         return await axios({
                 method: 'get',
                 url: `https://free.currconv.com/api/v7/convert?apiKey=af27a67bf6e735a91824&q=${monedasBuscarCotizacion}&compact=ultra`,
