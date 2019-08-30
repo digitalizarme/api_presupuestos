@@ -18,13 +18,19 @@ module.exports = (sequelize, DataTypes) => {
     t_logo                      : DataTypes.TEXT,
     c_slogan                    : DataTypes.STRING,
     c_direccion                 : DataTypes.STRING,
-     n_valor_porcentaje_comision: {
+    n_valor_porcentaje_comision: {
       type     : DataTypes.FLOAT,
       validate : {
         isFloat: true
       }
     },
-
+    n_valor_min_comision: {
+      type     : DataTypes.FLOAT,
+      validate : {
+        isFloat: true
+      }
+    },
+    n_id_moneda_valor_min_comision      : DataTypes.INTEGER,
     b_comision                   : DataTypes.BOOLEAN,
     b_flete                      : DataTypes.BOOLEAN,
     b_seguro                     : DataTypes.BOOLEAN,
