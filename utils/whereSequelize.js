@@ -46,21 +46,29 @@ module.exports = (query, tabla) => {
                     }
                 } else if (columna.dataField.indexOf('n_') === -1) {
                     const columnaCase = casos && casos.find(unCase => unCase[1] === columna.dataField);
-                    if(columnaCase){
+                    if (columnaCase) {
                         condicion.push(sequelize.where(columnaCase[0], {
                             [Op.like]: `%${searchText.toUpperCase()}%`
                         }));
-                    }
-                    else{
+                    } else {
                         condicion.push(sequelize.where(sequelize.fn("UPPER", sequelize.col(tablaComplementar + columna.dataField)), {
                             [Op.like]: `%${searchText.toUpperCase()}%`
                         }));
-    
+
                     }
                 } else if (columna.dataField.indexOf('n_') !== -1 && !isNaN(searchText)) {
-                    condicion.push(sequelize.where(sequelize.col(tablaComplementar + columna.dataField), {
-                        [Op.eq]: `${searchText}`
-                    }));
+                    const columnaCase = casos && casos.find(unCase => unCase[1] === columna.dataField);
+                    if (columnaCase) {
+                        condicion.push(sequelize.where(columnaCase[0], {
+                            [Op.eq]: `${searchText}`
+                        }));
+                    }
+                    else{
+                        condicion.push(sequelize.where(sequelize.col(tablaComplementar + columna.dataField), {
+                            [Op.eq]: `${searchText}`
+                        }));
+    
+                    }
                 }
             }
         }
