@@ -3,7 +3,7 @@ module.exports = {
   traeItemsMercadeirasServicios: require("./traeItemsMercadeirasServicios"),
   traeMercadeirasServicios:require('./traeMercadeirasServicios'),
   traePresupuesto:require('./traePresupuesto'),
-  traePresupuestosComision:require('./traePresupuestosComision'),
+  comisionPresupuestos:require('./comisionPresupuestos'),
   generaCuotas: require('./generaCuotas'),
   atualizaCuotas: require('./atualizaCuotas'),
   traeCuotas: require('./traeCuotas'),

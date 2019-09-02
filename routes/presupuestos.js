@@ -9,7 +9,7 @@ const {
     generaCuotas,
     atualizaCuotas,
     traeCuotas,
-    traePresupuestosComision
+    comisionPresupuestos
 } = require("../repositories/presupuestos");
 const {traduceErrores} = require("../utils/");
 
@@ -28,8 +28,8 @@ module.exports = (app, router) => {
         context.body = await traeTodosPresupuestos(context.query, 4);
     });
 
-    router.get("/presupuestos/comisionista", async function (context) {
-        context.body = await traeTodosPresupuestos(context.query, 4);
+    router.get("/presupuestos/comision", async function (context) {
+        context.body = await comisionPresupuestos(context.query);
     });
 
     router.get("/presupuestos/cobradores", async function (context) {

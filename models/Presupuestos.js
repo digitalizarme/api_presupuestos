@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
         n_id_persona: DataTypes.INTEGER,
         n_id_usuario: DataTypes.INTEGER,
         n_id_persona_comisionista: DataTypes.INTEGER,
+        n_porc_comision_empresa: DataTypes.FLOAT,
         n_porc_comisionista: DataTypes.FLOAT,
         n_id_seguro: DataTypes.INTEGER,
         n_id_status: DataTypes.INTEGER,
