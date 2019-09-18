@@ -20,11 +20,11 @@ module.exports = (app, router) => {
     });
 
     router.post('/mercaderias', async function (context) {
-        context.body = guardar(context.request.body);
+        context.body = await guardar(context.request.body);
     });
 
     router.put('/mercaderias', async function (context) {
-        context.body = actualizar(context.request.body);
+        context.body = await actualizar(context.request.body);
     });
 
     router.delete('/mercaderias', async function (context) {

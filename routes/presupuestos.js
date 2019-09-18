@@ -129,10 +129,10 @@ module.exports = (app, router) => {
     router.delete("/presupuestos/cuotas/:n_id_presupuesto", async function (context) {
         const n_id_presupuesto = context.params.n_id_presupuesto;
         try {
-            await Pagos.destroy({where: {
+            context.body = await Pagos.destroy({where: {
                     n_id_presupuesto
                 }});
-            context.body = [];
+            
 
         } catch (error) {
             throw Error(traduceErrores(error));
