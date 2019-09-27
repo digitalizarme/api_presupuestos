@@ -33,22 +33,28 @@ module.exports = (app, router) => {
     });
 
     router.get("/presupuestos/cobradores", async function (context) {
-        context.body = await Personas.findAll({
-            where: {
-                [Op.and]: [
-                    {
-                        b_activo: true
-                    }
-                ],
-                [Op.or]: [
-                    {
-                        b_funcionario: true
-                    }, {
-                        b_usuario: true
-                    }
-                ]
-            }
-        })
+        try {
+
+            context.body = await Personas.findAll({
+                where: {
+                    [Op.and]: [
+                        {
+                            b_activo: true
+                        }
+                    ],
+                    [Op.or]: [
+                        {
+                            b_funcionario: true
+                        }, {
+                            b_usuario: true
+                        }
+                    ]
+                }
+            })
+        } catch (error) {
+            throw Error(traduceErrores(error));
+        }
+
     });
 
     router.get("/presupuestos/itemsMercaderiasServicios/:idPresupuesto", async function (context) {
@@ -91,25 +97,31 @@ module.exports = (app, router) => {
         if (tipoPresupuesto === 'concluidos') {
             throw Error('No se permite eliminar presupuesto ya concluido.');
         }
-        const {id} = context.query;
-        await Pagos.destroy({
-            where: {
-                n_id_presupuesto: id
-            }
-        });
-        await ItemsMercaderias.destroy({
-            where: {
-                n_id_presupuesto: id
-            }
-        });
-        await ItemsServicios.destroy({
-            where: {
-                n_id_presupuesto: id
-            }
-        });
-        context.body = await Presupuestos.destroy({where: {
-                id
-            }});
+        try {
+            const {id} = context.query;
+            await Pagos.destroy({
+                where: {
+                    n_id_presupuesto: id
+                }
+            });
+            await ItemsMercaderias.destroy({
+                where: {
+                    n_id_presupuesto: id
+                }
+            });
+            await ItemsServicios.destroy({
+                where: {
+                    n_id_presupuesto: id
+                }
+            });
+            context.body = await Presupuestos.destroy({where: {
+                    id
+                }});
+
+        } catch (error) {
+            throw Error(traduceErrores(error));
+        }
+
     });
 
     router.post("/presupuestos", async function (context) {
@@ -132,7 +144,6 @@ module.exports = (app, router) => {
             context.body = await Pagos.destroy({where: {
                     n_id_presupuesto
                 }});
-            
 
         } catch (error) {
             throw Error(traduceErrores(error));
@@ -259,9 +270,13 @@ module.exports = (app, router) => {
         datos = {
             n_id_status: datos.n_id_status
         }
-        context.body = await Presupuestos.update(datos, {where: {
-                id
-            }});
+        try {
+            context.body = await Presupuestos.update(datos, {where: {
+                    id
+                }});
+        } catch (error) {
+            throw Error(traduceErrores(error));
+        }
 
     });
 

@@ -1,4 +1,5 @@
 const {Mercaderias, MercaderiasSubGrupos, MercaderiasMarcas} = require("../../models");
+const {traduceErrores} = require('../../utils');
 
 module.exports = async(datos) => {
     try

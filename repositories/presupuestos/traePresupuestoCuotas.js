@@ -1,6 +1,6 @@
 const traeCuotas = require("./traeCuotas");
 const traePresupuesto = require("./traePresupuesto");
-module.exports = async (id) => {
+module.exports = async(id) => {
 
     const cuotas = await traeCuotas(id);
     const presupuesto = await traePresupuesto(id);
@@ -9,7 +9,6 @@ module.exports = async (id) => {
         cuotas
     }
 
-    
     return retorno;
 
 }

@@ -14,7 +14,7 @@ module.exports = async(datos) => {
     dif = parseFloat(dif.toFixed(datos.n_decimales));
     for (let index = 0; index < parseInt(datos.n_cuotas_pago); index++) {
         const d_fecha_vcto = moment()
-            .add(datos.n_dias_Frecuencia_pago*index, 'days')
+            .add(datos.n_dias_Frecuencia_pago * index, 'days')
             .format('YYYY-MM-DD');
         const pago = {
             n_valor: index === 0

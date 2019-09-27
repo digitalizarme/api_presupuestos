@@ -36,19 +36,21 @@ module.exports = async(query) => {
         }, {
             model: Presupuestos,
             as: 'presupuesto',
-            include: [{
-                model: Personas,
-                as: 'comisionista',
-                attributes: ['c_nombre'],
-                where: whereComisionista
+            include: [
+                {
+                    model: Personas,
+                    as: 'comisionista',
+                    attributes: ['c_nombre'],
+                    where: whereComisionista
 
-            }, {
-                model: Personas,
-                as: 'persona',
-                attributes: ['c_nombre','c_identificacion']
-    
-            }],
-            attributes: ['n_valor_comision','createdAt']
+                }, {
+                    model: Personas,
+                    as: 'persona',
+                    attributes: ['c_nombre', 'c_identificacion']
+
+                }
+            ],
+            attributes: ['n_valor_comision', 'createdAt']
 
         }
     ];
@@ -80,8 +82,7 @@ module.exports = async(query) => {
         where,
         include,
         group: [
-            'n_id_presupuesto', 
-            sequelize.col('Pagos.createdAt'),
+            'n_id_presupuesto', sequelize.col('Pagos.createdAt'),
             sequelize.col('moneda.id'),
             sequelize.col('presupuesto.id'),
             sequelize.col('presupuesto->comisionista.id'),

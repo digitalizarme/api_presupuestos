@@ -1,66 +1,68 @@
-const { Cotizaciones }     = require("../models");
-const { enlinea, traeTodasCotizaciones }                   = require("../repositories/cotizaciones");
-const { traduceErrores,checkAccess } = require('../utils/');
+const {Cotizaciones} = require("../models");
+const {enlinea, traeTodasCotizaciones} = require("../repositories/cotizaciones");
+const {traduceErrores, checkAccess} = require('../utils/');
 
 module.exports = (app, router) => {
 
-    router.get('/cotizaciones/ultimas', async function(context) {  
-        context.body = await enlinea(context.query);
-    });  
+    router
+        .get('/cotizaciones/ultimas', async function (context) {
+            context.body = await enlinea(context.query);
+        });
 
-    router.get('/cotizaciones', async function(context) {  
+    router.get('/cotizaciones', async function (context) {
         await checkAccess(context.headers.authorization, 'b_administrador');
         context.body = await traeTodasCotizaciones(context);
 
-    });  
+    });
 
-    router.get('/cotizaciones/:id', async function(context) {  
+    router.get('/cotizaciones/:id', async function (context) {
         await checkAccess(context.headers.authorization, 'b_administrador');
         const id = context.params.id;
-        context.body = await Cotizaciones.findOne({where:{id}})        
+        context.body = await Cotizaciones.findOne({where: {
+                id
+            }})
 
-    });  
+    });
 
-    router.post('/cotizaciones', async function(context) {  
+    router.post('/cotizaciones', async function (context) {
         await checkAccess(context.headers.authorization, 'b_administrador');
         const datos = context.request.body;
         try
         {
             await Cotizaciones.create(datos);
             context.body = datos;
-        }
-        catch(error) {
+        } catch (error) {
             throw Error(traduceErrores(error))
         };
 
+    });
 
-    });  
-      
-    router.put('/cotizaciones', async function(context) {  
+    router.put('/cotizaciones', async function (context) {
         await checkAccess(context.headers.authorization, 'b_administrador');
         const datos = context.request.body;
         const id = datos.id;
         try
         {
-            await Cotizaciones.update( datos , { where: { id } });
+            await Cotizaciones.update(datos, {where: {
+                    id
+                }});
             context.body = datos;
-        }
-        catch(error) {
+        } catch (error) {
             throw Error(traduceErrores(error))
         };
 
+    });
 
-    });    
-
-    router.delete('/cotizaciones', async function(context) {  
+    router.delete('/cotizaciones', async function (context) {
         await checkAccess(context.headers.authorization, 'b_administrador');
-        try{
+        try {
             const {id} = context.query;
-            context.body =  await Cotizaciones.destroy( { where: { id } });
-        }
-        catch(error) {
+            context.body = await Cotizaciones.destroy({where: {
+                    id
+                }});
+        } catch (error) {
             throw Error(traduceErrores(error))
         };
-    });    
+    });
 
 };

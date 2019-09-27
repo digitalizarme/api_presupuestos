@@ -1,10 +1,10 @@
-const { sequelize } = require('../../models');
+const {sequelize} = require('../../models');
 /**
  * update generic
  * */
 module.exports = async() => {
 
-  const SQL = `
+    const SQL = `
   SELECT * FROM (
                 SELECT
                 m.id
@@ -96,5 +96,5 @@ c_descripcion
 ;
 
   `;
-  return await sequelize.query(SQL, { type: sequelize.QueryTypes.SELECT });
+    return await sequelize.query(SQL, {type: sequelize.QueryTypes.SELECT});
 };
