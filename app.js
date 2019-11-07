@@ -5,9 +5,9 @@ const KoaRouter = require('koa-router');
 const bodyParser = require('koa-bodyparser');
 const jwt = require('koa-jwt');
 const morgan = require('koa-morgan');
-const pathToRegexp = require('path-to-regexp');
 const app = new Koa();
 const port = parseInt(process.env.PORT, 10) || 3000;
+const compress = require('koa-compress');
 
 // Server Tasks
 //require('./server-tasks/tasks')();
@@ -21,6 +21,13 @@ require('./routes/index.js')(app, router);
 app.env = process.env.NODE_ENV;//|| 'development'
 module.exports = app
   .use(cors())
+  .use(compress({
+    filter: function (content_type) {
+      return /json/i.test(content_type)
+    },
+    threshold: 2048,
+    flush: require('zlib').Z_SYNC_FLUSH
+  }))  
   .use(morgan('[:date[clf]] :method :url [status: :status] [length: :res[content-length]] - :response-time ms'))
   .use(jwt({
     secret: process.env.JWT_KEY || 'Digitalizar.me API'
