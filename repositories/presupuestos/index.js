@@ -8,4 +8,5 @@ module.exports = {
   atualizaCuotas: require('./atualizaCuotas'),
   traeCuotas: require('./traeCuotas'),
   traePresupuestoCuotas:require('./traePresupuestoCuotas'),
+  actualizaPresupuesto:require('./actualizaPresupuesto'),
 }

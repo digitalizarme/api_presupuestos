@@ -9,7 +9,8 @@ const {
     generaCuotas,
     atualizaCuotas,
     traeCuotas,
-    comisionPresupuestos
+    comisionPresupuestos,
+    actualizaPresupuesto,
 } = require("../repositories/presupuestos");
 const {traduceErrores} = require("../utils/");
 
@@ -247,21 +248,8 @@ module.exports = (app, router) => {
 
     router.put("/presupuestos", async function (context) {
         const datos = context.request.body;
-        if (datos.n_id_status === 4) {
-            throw Error('No se permite actualizar presupuesto ya concluido.');
-        }
-        const id = datos.id;
-        try {
-            if (datos.cuotas && datos.cuotas.length > 0) {
-                await atualizaCuotas(datos.cuotas);
-            }
-            await Presupuestos.update(datos, {where: {
-                    id
-                }});
-            context.body = datos;
-        } catch (error) {
-            throw Error(traduceErrores(error));
-        }
+        context.body = await actualizaPresupuesto(datos);
+
     });
 
     router.put("/presupuestos/status", async function (context) {
