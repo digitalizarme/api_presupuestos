@@ -2,7 +2,7 @@ const {Presupuestos, Pagos} = require("../../models");
 const sequelize = require('sequelize');
 const {Op} = sequelize;
 
-const {atualizaCuotas} = require("./");
+const atualizaCuotas = require("./atualizaCuotas");
 const {traduceErrores} = require("../../utils/");
 module.exports = async(datos) => {
 
@@ -11,15 +11,16 @@ module.exports = async(datos) => {
     }
     const id = datos.id;
     try {
-        if (datos.n_id_status < 3 && datos.cuotas && datos.cuotas.length > 0) {
+        if (datos.cuotas && datos.cuotas.length > 0) {
             const pagos = await Pagos.findAll({
                 where: {
-                    d_fecha_ago: {
+                    d_fecha_pago: {
                         [Op.ne]: null
                     },
                     n_id_presupuesto: id
                 }
             });
+            console.log(pagos)
             if (pagos.length === 0) {
                 await atualizaCuotas(datos.cuotas);
 
