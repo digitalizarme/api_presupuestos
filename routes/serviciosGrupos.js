@@ -11,7 +11,7 @@ module.exports = (app, router) => {
         });
 
     router.get('/serviciosGrupos/todos', async function (context) {
-        context.body = await ServiciosGrupos.findAll()
+        context.body = await ServiciosGrupos.findAll({order: ['c_descripcion']});
 
     });
 

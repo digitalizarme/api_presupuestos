@@ -51,8 +51,10 @@ module.exports = (app, router) => {
                             b_usuario: true
                         }
                     ]
-                }
-            })
+                },
+                order: ['c_nombre']
+            });
+            
         } catch (error) {
             throw Error(traduceErrores(error));
         }

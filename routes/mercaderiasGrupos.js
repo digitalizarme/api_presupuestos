@@ -11,7 +11,7 @@ module.exports = (app, router) => {
         });
 
     router.get('/mercaderiasGrupos/todos', async function (context) {
-        context.body = await MercaderiasGrupos.findAll();
+        context.body = await MercaderiasGrupos.findAll({order: ['c_descripcion']});
 
     });
 

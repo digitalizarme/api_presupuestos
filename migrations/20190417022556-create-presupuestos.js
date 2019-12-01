@@ -90,6 +90,14 @@ module.exports = {
       t_observacion: {
         type: Sequelize.TEXT
       },
+      b_entregue: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      c_recebido_por: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

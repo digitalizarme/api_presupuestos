@@ -17,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
         n_dias_entrega: DataTypes.INTEGER,
         n_cuotas_pago: DataTypes.INTEGER,
         n_dias_Frecuencia_pago: DataTypes.INTEGER,
+        b_entregue: DataTypes.BOOLEAN,
+        c_recebido_por: DataTypes.TEXT,
         t_observacion: DataTypes.TEXT,
         n_total_general: DataTypes.VIRTUAL
     }, {tableName: 'Presupuestos'});

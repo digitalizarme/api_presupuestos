@@ -11,7 +11,7 @@ module.exports = (app, router) => {
         });
 
     router.get('/mercaderiasMarcas/todas', async function (context) {
-        context.body = await MercaderiasMarcas.findAll();
+        context.body = await MercaderiasMarcas.findAll({order: ['c_descripcion']});
 
     });
 
