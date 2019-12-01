@@ -1,6 +1,6 @@
 module.exports = (error) => {
     let erroPadrao;
-    //console.log(error,"truduce errores");
+    console.log(error,"truduce errores");
     if (error.errors && error.errors.length > 0) {
         //console.log(error.errors[0].message);
         switch (error.errors[0].message) {

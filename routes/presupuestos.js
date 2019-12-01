@@ -10,8 +10,9 @@ const {
     atualizaCuotas,
     traeCuotas,
     comisionPresupuestos,
-    actualizaPresupuesto,
+    actualizaPresupuesto
 } = require("../repositories/presupuestos");
+const {tengoPagos} = require("../repositories/pagos");
 const {traduceErrores} = require("../utils/");
 
 module.exports = (app, router) => {
@@ -100,6 +101,12 @@ module.exports = (app, router) => {
         }
         try {
             const {id} = context.query;
+            if (tipoPresupuesto === 'aprobados') {
+                const totPagamentos = await tengoPagos(id);
+                if (totPagamentos > 0) {
+                    throw Error('No se permite eliminar presupuesto con cuotas pagas.');
+                }
+            }
             await Pagos.destroy({
                 where: {
                     n_id_presupuesto: id
@@ -142,6 +149,10 @@ module.exports = (app, router) => {
     router.delete("/presupuestos/cuotas/:n_id_presupuesto", async function (context) {
         const n_id_presupuesto = context.params.n_id_presupuesto;
         try {
+            const totPagamentos = await tengoPagos(n_id_presupuesto);
+            if (totPagamentos > 0) {
+                throw Error('No se permite eliminar cuotas pagas.');
+            }
             context.body = await Pagos.destroy({where: {
                     n_id_presupuesto
                 }});
@@ -153,6 +164,10 @@ module.exports = (app, router) => {
 
     router.post("/presupuestos/cuotas", async function (context) {
         const datos = context.request.body;
+        const totPagamentos = await tengoPagos(datos.id);
+        if (totPagamentos > 0) {
+            throw Error('No se permite generar cuotas de un presupuesto cuando tiene alguna cuota paga.');
+        }
         try {
 
             context.body = await generaCuotas(datos);
@@ -172,7 +187,9 @@ module.exports = (app, router) => {
                 }});
             const todosPagos = await Pagos.findAll({
                 where: {
-                    d_fecha_pago: null,
+                    d_fecha_pago: {
+                        [Op.is]: null
+                    },
                     n_id_presupuesto
                 }
             });
@@ -195,7 +212,11 @@ module.exports = (app, router) => {
 
     router.post("/presupuestos/item", async function (context) {
         const datos = context.request.body;
-        try {
+        const totPagamentos = await tengoPagos(datos.n_id_presupuesto);
+        if (totPagamentos > 0) {
+            throw Error('No se permite eliminar cuotas pagas.');
+        }
+    try {
             if (datos.c_tipo === "M") {
                 await ItemsMercaderias
                     .create(datos)
@@ -213,6 +234,12 @@ module.exports = (app, router) => {
     router.delete("/presupuestos/item/:id/:tipo", async function (context) {
         try {
             const {id, tipo} = context.params;
+            const datos = context.request.body;
+
+            const totPagamentos = await tengoPagos(datos.n_id_presupuesto);
+            if (totPagamentos > 0) {
+                throw Error('No se permite eliminar item de un presupuesto con cuotas pagas.');
+            }
             if (tipo === "M") {
                 context.body = await ItemsMercaderias.destroy({where: {
                         id
@@ -230,6 +257,10 @@ module.exports = (app, router) => {
     router.put("/presupuestos/item", async function (context) {
         const datos = context.request.body;
         const id = datos.id;
+        const totPagamentos = await tengoPagos(datos.n_id_presupuesto);
+        if (totPagamentos > 0) {
+            throw Error('No se permite actualizar itens de un presupuesto con cuotas pagas.');
+        }
         try {
             if (datos.c_tipo === "M") {
                 await ItemsMercaderias.update(datos, {where: {
