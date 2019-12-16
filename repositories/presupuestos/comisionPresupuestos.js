@@ -102,11 +102,11 @@ module.exports = async(query) => {
                 'n_valor_presupuesto'
             ],
             [
-                sequelize.literal(`presupuesto.n_valor_comision*(presupuesto.n_porc_comisionista/100)`),
+                sequelize.literal(`(presupuesto.n_valor_comision+SUM("Pagos"."n_desc_redondeo"))*(presupuesto.n_porc_comisionista/100)`),
                 'n_valor_comisionista'
             ],
             [
-                sequelize.literal(`presupuesto.n_valor_comision - (presupuesto.n_valor_comision*(presupuesto.n_porc_comisionista/100))`),
+                sequelize.literal(`(presupuesto.n_valor_comision+SUM("Pagos"."n_desc_redondeo")) - ((presupuesto.n_valor_comision+SUM("Pagos"."n_desc_redondeo"))*(presupuesto.n_porc_comisionista/100))`),
                 'n_ganacia_empresa'
             ]
         ],
