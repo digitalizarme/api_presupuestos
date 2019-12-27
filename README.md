@@ -8,4 +8,5 @@ Para que funcione en su localhost seria:
 3) npm i
 4) En el archivo /config/config.js actualizar la contraseña para acceder al servidor PostgreSQL
 5) ./node_modules/.bin/sequelize db:migrate
-6) npm run dev
+6) ./node_modules/.bin/sequelize db:seed:all
+7) npm run dev
