@@ -9,10 +9,18 @@ module.exports = (app, router) => {
             context.body = await getAllPersonas(context.query)
         });
 
-    router.get('/personas/todas', async function (context) {
-        context.body = await Personas.findAll({order: ['c_nombre']});
-    });
+        router.get('/personas/todas', async function (context) {
+            context.body = await Personas.findAll({order: ['c_nombre']});
+        });
 
+        router.get('/personas/comisionistas', async function (context) {
+            context.body = await Personas.findAll({order: ['c_nombre'], where:{b_comisionista:true}});
+        });
+
+        router.get('/personas/clientes', async function (context) {
+            context.body = await Personas.findAll({order: ['c_nombre'], where:{b_cliente:true}});
+        });
+        
     router.get('/personas/:id', async function (context) {
         const id = context.params.id;
         context.body = await Personas.findOne({where: {

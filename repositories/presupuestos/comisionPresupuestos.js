@@ -11,10 +11,14 @@ const { Op } = sequelize;
 module.exports = async query => {
   const {
     n_id_presupuesto,
+    n_id_persona,
+    t_observacion,
+    n_id_moneda,
     n_id_persona_comisionista,
     d_fecha_ini,
     d_fecha_fin
   } = query;
+
 
   let whereComisionista = {
     id: {
@@ -27,6 +31,29 @@ module.exports = async query => {
       id: n_id_persona_comisionista
     };
   }
+
+  let wherePresupuesto = {
+    id: {
+      [Op.gte]: 1
+    }
+  };
+
+  if (n_id_persona) {
+    wherePresupuesto = {
+      n_id_persona
+    };
+  }
+
+  if (t_observacion) {
+    wherePresupuesto = {
+      ...wherePresupuesto,
+      t_observacion :
+      {
+        [Op.like]: `%${t_observacion.toUpperCase()}%`,
+      }
+    };
+  }
+
 
   const include = [
     {
@@ -47,6 +74,7 @@ module.exports = async query => {
     {
       model: Presupuestos,
       as: "presupuesto",
+      where: wherePresupuesto,
       include: [
         {
           model: Personas,
@@ -71,7 +99,6 @@ module.exports = async query => {
   };
   if (d_fecha_ini) {
     where = {
-      ...where,
       d_fecha_pago: {
         [Op.gte]: d_fecha_ini
       }
@@ -79,9 +106,12 @@ module.exports = async query => {
   }
   if (d_fecha_fin) {
     where = {
-      ...where,
       d_fecha_pago: {
-        [Op.lte]: d_fecha_fin
+        [Op.and]: {
+          [Op.gte]: d_fecha_ini,
+          [Op.lte]: d_fecha_fin
+        }
+        
       }
     };
   }
@@ -91,6 +121,14 @@ module.exports = async query => {
       n_id_presupuesto
     };
   }
+  if (n_id_moneda) {
+    where = {
+      ...where,
+      n_id_moneda
+    };
+  }
+
+  
 
   return await Pagos.findAll({
     where,
