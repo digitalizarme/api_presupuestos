@@ -3,7 +3,7 @@ module.exports = {
     dialect: "postgres",
     database:'presupuestos',
     username:'postgres',
-    password:'gu99402852',
+    password:'52425242',
     host:'localhost',
     define: {
       charset: "utf8",
