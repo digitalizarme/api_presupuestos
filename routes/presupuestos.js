@@ -30,7 +30,7 @@ module.exports = (app, router) => {
         context.body = await traeTodosPresupuestos(context.query, 4);
     });
 
-    router.get("/presupuestos/comision", async function (context) {
+    router.get("/presupuestos/comisiones", async function (context) {
         context.body = await comisionPresupuestos(context.query);
     });
 
