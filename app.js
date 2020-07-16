@@ -8,7 +8,7 @@ const morgan = require('koa-morgan');
 const app = new Koa();
 const port = parseInt(process.env.PORT, 10) || 3000;
 const compress = require('koa-compress');
-
+const helmet = require("koa-helmet");
 // Server Tasks
 //require('./server-tasks/tasks')();
 
@@ -20,6 +20,7 @@ require('./routes/index.js')(app, router);
 // Koa
 app.env = process.env.NODE_ENV;//|| 'development'
 module.exports = app
+  .use(helmet())
   .use(cors())
   .use(compress({
     filter: function (content_type) {
