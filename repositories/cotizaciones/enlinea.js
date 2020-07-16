@@ -52,29 +52,31 @@ module.exports = async(datos) => {
     }
     if (arrayCotizaciones.length !== monedas.length) {
         let monedasBuscarCotizacion = datos.monedas;
-        if (monedas.length !== totalMonedas) {
-            const todasMonedas = await Monedas.findAll({raw: true});
-            arrayMonedas = [];
-            let stringMoneda;
-            for (const itemMoneda of todasMonedas) {
-                if (itemMoneda.c_letras !== monedaBase) {
-                    stringMoneda = monedaBase + "_" + itemMoneda.c_letras;
-                    arrayMonedas.push(stringMoneda);
+        //desabilitador que a versao free nao permite mais de duas moedas
+        // if (monedas.length !== totalMonedas) {
+        //     const todasMonedas = await Monedas.findAll({raw: true});
+        //     arrayMonedas = [];
+        //     let stringMoneda;
+        //     for (const itemMoneda of todasMonedas) {
+        //         if (itemMoneda.c_letras !== monedaBase) {
+        //             stringMoneda = monedaBase + "_" + itemMoneda.c_letras;
+        //             arrayMonedas.push(stringMoneda);
 
-                }
-            }
-            monedasBuscarCotizacion = arrayMonedas.join();
+        //         }
+        //     }
+        //     monedasBuscarCotizacion = arrayMonedas.join();
 
-        }
-
+        // }
+        const  url = `https://free.currconv.com/api/v7/convert?apiKey=af27a67bf6e735a91824&q=${monedasBuscarCotizacion}&compact=ultra`
         return await axios({
                 method: 'get',
-                url: `https://free.currconv.com/api/v7/convert?apiKey=af27a67bf6e735a91824&q=${monedasBuscarCotizacion}&compact=ultra`,
+                url,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
             }).then(async function (response) {
+
             const data = response.data;
             if (typeof data.status === "undefined") {
                 await guardaCotizaciones(data);
