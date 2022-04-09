@@ -28,7 +28,7 @@
     "koa-jwt": "^3.6.0",
     "koa-morgan": "^1.0.1",
     "koa-router": "^7.4.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "path-to-regexp": "^3.2.0",
     "pg": "^7.18.2",
     "sequelize": "^5.22.3"
