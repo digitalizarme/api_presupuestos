@@ -31,7 +31,7 @@
     "moment": "^2.29.1",
     "path-to-regexp": "^3.2.0",
     "pg": "^7.18.2",
-    "sequelize": "^5.22.3"
+    "sequelize": "^6.29.0"
   },
   "devDependencies": {
     "chai": "^4.3.0",
